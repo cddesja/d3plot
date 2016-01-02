@@ -1,0 +1,14 @@
+Package: D3plot
+Type: Package
+Title: Interactive plots in R using D3.js
+Version: 0.1.0
+Author: cddesjardins@gmail.com
+Maintainer: cddesjardins@gmail.com
+Description: More about what it does (maybe more than one line)
+License: BSD 3-Clause License
+Imports:
+    jsonlite
+Suggests:
+    magrittr
+LazyData: TRUE
+RoxygenNote: 5.0.1
