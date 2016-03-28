@@ -1,5 +1,6 @@
 #' 3d demo https://gist.github.com/hlvoorhees/5986172
 #'
+#'@export
 irisDemo <- function(){
 tmp <- paste0('<!DOCTYPE html >
 <html >

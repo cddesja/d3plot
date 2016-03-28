@@ -6,24 +6,28 @@
 \usage{
 d3plot(x, y, data = NULL, ...)
 }
+\arguments{
+\item{x}{the x-axis (independent) variable}
+
+\item{y}{the y-axis (dependent) variable}
+
+\item{data}{the dataset containing the variables}
+
+\item{...}{additional, optional arguments}
+}
 \description{
-\code{d3plot()} initializes a d3plot object. It can be used to declare input data frame for a D3 plot and specify various aesthetics as optional input arguments.
+\code{d3plot} initializes a d3plot object. It can be used to declare input data frame for a D3 plot and specify various aesthetics as optional input arguments.
 }
 \details{
-\code{d3plot()} is used to construct D3 plots. They can be incrementally created
+\code{d3plot} is used to construct D3 plots. They can be incrementally created
 using the forward-pipe operator from the \code{magrittr} package or without this operator. It is strongly recommended to use the forward-pipe operator.
-
-@export
- @importFrom jsonlite toJSON
- @param x the x-axis (independent) variable
- @param y the y-axis (dependent) variable
- @param data the dataset containing the variables
- @param ... additional, optional arguments
-
-@examples
- \dontrun{
- d3plot(x = mpg, y = cyl, data = mtcars) %>% d3_point()
- }
- @seealso \link{\code{d3_point}}
+}
+\examples{
+\dontrun{
+d3plot(x = mpg, y = cyl, data = mtcars) \%>\% d3_point()
+}
+}
+\seealso{
+\code{\link{d3_line}}, \code{\link{d3_point}}
 }
 

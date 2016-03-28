@@ -1,20 +1,18 @@
 #' Create a new D3 line plot
 #'
-#'  \code{d3_line()} creates a D3 line plot. It takes data either directly or passed to it from \link{\code{d3plot()}} function.
+#' \code{d3_line()} creates a D3 line plot. It takes data either directly or passed to it from \code{\link{d3plot()}} function.
+#' @export
+#' @param data data in JSON format, created by d3plot() or from another source
+#' @param ... additional, optional arguments
 #'
-#'
-#'  @export
-#'  @param data data in JSON format, created by d3plot() or from another source
-#'  @param ... additional, optional arguments
-#'
-#'  @examples
-#'  \dontrun{
-#'  # OK
-#'  d3_point(d3plot(x = mpg, y = cyl, color = cyl, id = rownames(mtcars), data = mtcars))
-#'  # Better
-#'  d3plot(x = Sepal.Length, y = Petal.Length, color = Species, data = iris) %>% d3_line()
-#'  }
-#'  @seealso \link{\code{d3plot}}
+#' @examples
+#' \dontrun{
+#' # OK
+#' d3_point(d3plot(x = mpg, y = cyl, color = cyl, id = rownames(mtcars), data = mtcars))
+#' # Better
+#' d3plot(x = Sepal.Length, y = Petal.Length, color = Species, data = iris) %>% d3_line()
+#' }
+#' @seealso \code{\link{d3plot}}
 #'
 
 d3_line <- function(data, ...){
