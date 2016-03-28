@@ -5,142 +5,53 @@
 #'
 #'  @export
 #'  @param data data in JSON format, created by d3plot() or from another source
-#'  @param css additional css stlying
 #'  @param ... additional, optional arguments
 #'
 #'  @examples
 #'  \dontrun{
 #'  # OK
-#'  d3_point(d3plot(x = mpg, y = cyl, data = mtcars))
+#'  d3_point(d3plot(x = mpg, y = cyl, color = cyl, id = rownames(mtcars), data = mtcars))
 #'  # Better
-#'  d3plot(x = mpg, y = cyl, data = mtcars) %>% d3_point()
+#'  d3plot(x = Sepal.Length, y = Petal.Length, color = Species, data = iris) %>% d3_point(radius = 5)
 #'  }
 #'  @seealso \link{\code{d3plot}}
 #'
 
-d3_point <- function(data, css = FALSE){
-  if(css == FALSE)
-  tmpfile <- paste('
-  <!DOCTYPE html>
-                   <html>
-                   <head>
-                   <title>Simple Scatterplot</title>
-                   <style type="text/css">
+d3_point <- function(data, ...){
+  arguments <- as.list(match.call())[-1]
+  tmpfile <- paste0(write_head(arguments), '
+<script type="text/javascript"> var dataset =', data, ';
+function type (d){
+  d.x = +d.x;
+  d.y = +d.y;
+return d;
+};')
 
-                   body {
-                   font: 12px Helvetica;
-                   }
+tmpfile <- paste0(tmpfile, setup_canvas(arguments),' function render(data) {', setup_axes(),'
 
-                   circle {
-                   fill: blue;
-                   stroke-width: 2px;
-                   }
+// Enter/binding
+svg.selectAll("circle")
+  .data(data)
+  .enter().append("circle")
+  .attr("cx", function (d) { return xScale(d.x); })
+  .attr("cy", function (d) { return yScale(d.y); })')
+if(grepl("color", data)){
+  tmpfile <- paste0(tmpfile, '.attr("fill", function(d) { return color(d.color); })')
+} else tmpfile <- paste0(tmpfile, '.attr("fill", "black")')
+  if(any(names(arguments) == "radius")){
+    tmpfile <- paste0(tmpfile, '.attr("r", ', eval(arguments$radius), ")")
+    } else
+    tmpfile <- paste0(tmpfile, '.attr("r", 5)')
 
-                   line {
-                   stroke-width: 2px;
-                   }
-
-                   .axis path{
-                   stroke: #3D1F1F;
-                   fill: none;
-                   stroke-width: 1;
-                   }
-
-                   .axis text {
-                   shape-rendering: crispEdges;
-                   fill: #3D1F1F;
-                   }
-                   </style>
-                   </head>
-                   <body>
-                   <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-                   <script type="text/javascript">
-
-                   var dataset =', data, ';
-                   var margin = { left: 50, top: 10, right: 50, bottom: 50 };
-                   var outerHeight = 300;
-                   var outerWidth = 500;
-                   var innerHeight = outerHeight - margin.top - margin.bottom;
-                   var innerWidth = outerWidth - margin.left - margin.right;
-
-                   var svg = d3.select("body")
-                   .append("svg")
-                   .attr("width", outerWidth)
-                   .attr("height", outerHeight);
-
-                   var g = svg.append("g")
-                   .attr("transform", "translate(" + margin.left + "," + margin.top + ")" );
-
-                   var xAxisG = g.append("g")
-                   .attr("transform", "translate(-" + margin.left + "," + innerHeight + ")");
-                   var yAxisG = g.append("g")
-                   .attr("transform", "translate(-10,0)")
-                   .attr("class" ,"axis");
-
-                   var xScale = d3.scale.linear().range([margin.left, innerWidth]);
-                   var yScale = d3.scale.linear().range([innerHeight, margin.top]);
-                   var xAxis = d3.svg.axis().scale(xScale).orient("bottom");
-                   var yAxis = d3.svg.axis().scale(yScale).orient("left");
-
-                   function render(data) {
-                   xScale.domain(d3.extent(data, function (d) { return d.x; }));
-                   yScale.domain(d3.extent(data, function (d) { return d.y; }));
-
-                   xAxisG
-                   .attr("class" ,"axis")
-                   .call(xAxis);
-                   yAxisG
-                   .attr("class" ,"axis")
-                   .call(yAxis);
-
-                   function type (d){
-                   d.x = +d.x;
-                   d.y = +d.y;
-                   return d;
-                   }
-
-                   // Enter/binding
-                   var circles = svg.selectAll("circle")
-                   .data(data)
-                   .enter().append("circle")
-                   .on("mouseover", function() {
-                   d3.select(this)
-                   .style("fill", "red")
-                   .style("fill-opacity", .75)
-                   .style("stroke", "black")
-                   .attr("r", 15)
-                   })
-                   .on("mouseout", function() {
-                   d3.select(this)
-                   .style("fill", "blue")
-                   .style("fill-opacity", 1)
-                   .style("stroke", "blue")
-                   .attr("r", 5)
-                   });
-
-
-                   // Update
-                   circles
-                   .attr("cx", function (d) { return xScale(d.x); })
-                   .attr("cy", function (d) { return yScale(d.y); })
-                   .attr("r", 5 )
-                   .attr("fill", "blue")
-                   .attr("stroke", 1);
-
-
-
-                   // Exit
-                   circles.exit().remove();
-                   }
-
-
-                   render(dataset);
-                   </script>
-                   </body>
-                   </html>
-                   ')
-  htmlFile <- tempfile(fileext=".html")
-  cat(tmpfile, file = htmlFile)
-  viewer <- getOption("viewer")
-  viewer(htmlFile)
+tmpfile <- paste0(tmpfile,
+'
+  .append("title")
+  .text(function(d){
+    return d.id;
+  });
+};
+render(dataset);
+')
+tmpfile <- paste0(tmpfile, close_html())
+show_d3(tmpfile, ...)
 }

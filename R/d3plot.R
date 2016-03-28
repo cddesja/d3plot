@@ -27,6 +27,8 @@ d3plot <- function(x, y, data = NULL, ...){
     tmp.data$group <- group
   if(any(names(tmp.data) == "color"))
     tmp.data$color <- color
+  if(any(names(tmp.data) == "id"))
+    tmp.data$id <- id
   } else {
     x <- eval(arguments$x, data)
     y <- eval(arguments$y, data)
@@ -35,8 +37,14 @@ d3plot <- function(x, y, data = NULL, ...){
       tmp.data$group <- eval(arguments$group, data)
     if(any(names(arguments) == "color"))
       tmp.data$color <- eval(arguments$color, data)
+    if(any(names(arguments) == "id"))
+      tmp.data$id <- eval(arguments$id, data)
   }
   d3.data <- toJSON(tmp.data)
+
+  # Look for HTML tags and CSS
+  if(any(names(arguments) == "title"))
+    html.title <- eval(arguments$title)
   class(d3.data) <- "d3plot"
   return(d3.data)
 }
