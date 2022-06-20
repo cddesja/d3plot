@@ -25,4 +25,3 @@ d3plot(x = Sepal.Length, y = Petal.Length, color = Species, data = iris) \%>\% d
 \seealso{
 \code{\link{d3plot}}
 }
-

@@ -30,4 +30,3 @@ d3plot(x = mpg, y = cyl, data = mtcars) \%>\% d3_point()
 \seealso{
 \code{\link{d3_line}}, \code{\link{d3_point}}
 }
-

@@ -10,4 +10,5 @@ Depends:
     magrittr,
     jsonlite
 LazyData: TRUE
-RoxygenNote: 5.0.1
+RoxygenNote: 7.1.1
+Encoding: UTF-8
