@@ -1,4 +1,4 @@
-Package: D3plot
+Package: d3plot
 Type: Package
 Title: Create R Plots Using D3.js
 Version: 0.1.0
