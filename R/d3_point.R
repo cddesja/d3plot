@@ -40,6 +40,19 @@ svg.selectAll("circle")
     tmpfile <- paste0(tmpfile, '.attr("r", ', eval(arguments$radius), ")")
   } else
     tmpfile <- paste0(tmpfile, '.attr("r", 5)')
+  if(any(names(arguments) == "opacity")){
+    tmpfile <- paste0(tmpfile, '.attr("opacity", ', eval(arguments$opacity), ")")
+  }
+  ## --------------------------------------- ##
+  ## stroke width and stroke not working yet ##
+  ## --------------------------------------- ##
+  if(any(names(arguments) == "stroke_width")){
+    tmpfile <- paste0(tmpfile, '.attr("stroke-width", ', eval(arguments$stroke_width), ")")
+  }
+  if(any(names(arguments) == "stroke")){
+    tmpfile <- paste0(tmpfile, '.attr("stroke", ', eval(arguments$stroke), ")")
+  }
+
 
   tmpfile <- paste0(tmpfile,
                     '
