@@ -4,39 +4,35 @@ setup_canvas <- function(...){
   height = 500 - margin.top - margin.bottom
   yTicks = 5;
 
-  var color = d3.scale.category10();
+  var color = d3.scaleOrdinal(d3.schemeCategory10);
 
-  var xScale = d3.scale.linear()
+  var xScale = d3.scaleLinear()
   .range([0, width]);
 
-  var yScale = d3.scale.linear()
+  var yScale = d3.scaleLinear()
   .range([height, 0]);
 
-  var xAxisBot = d3.svg.axis()
+  var xAxisBot = d3.axisBottom()
   .scale(xScale)
   .ticks(yTicks)
-  .outerTickSize(0)
-  .orient("bottom");
+  .tickSizeOuter(0);
 
-  var xAxisTop = d3.svg.axis()
+  var xAxisTop = d3.axisTop()
   .scale(xScale)
   .ticks(yTicks)
   .tickFormat("")
-  .outerTickSize(0)
-  .orient("top");
+  .tickSizeOuter(0);
 
-  var yAxisLeft = d3.svg.axis()
+  var yAxisLeft = d3.axisLeft()
   .scale(yScale)
   .ticks(yTicks)
-  .outerTickSize(0)
-  .orient("left");
+  .tickSizeOuter(0);
 
-  var yAxisRight = d3.svg.axis()
+  var yAxisRight = d3.axisRight()
   .scale(yScale)
   .ticks(yTicks)
   .tickFormat("")
-  .outerTickSize(0)
-  .orient("right");
+  .tickSizeOuter(0);
 
   var svg = d3.select("body").append("svg")
   .attr("width", width + margin.left + margin.right)

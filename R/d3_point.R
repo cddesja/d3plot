@@ -25,7 +25,7 @@ function type (d){
 return d;
 };')
 
-tmpfile <- paste0(tmpfile, setup_canvas(arguments),' function render(data) {', setup_axes(),'
+  tmpfile <- paste0(tmpfile, setup_canvas(arguments),' function render(data) {', setup_axes(),'
 
 // Enter/binding
 svg.selectAll("circle")
@@ -33,16 +33,16 @@ svg.selectAll("circle")
   .enter().append("circle")
   .attr("cx", function (d) { return xScale(d.x); })
   .attr("cy", function (d) { return yScale(d.y); })')
-if(grepl("color", data)){
-  tmpfile <- paste0(tmpfile, '.attr("fill", function(d) { return color(d.color); })')
-} else tmpfile <- paste0(tmpfile, '.attr("fill", "black")')
+  if(grepl("color", data)){
+    tmpfile <- paste0(tmpfile, '.attr("fill", function(d) { return color(d.color); })')
+  } else tmpfile <- paste0(tmpfile, '.attr("fill", "black")')
   if(any(names(arguments) == "radius")){
     tmpfile <- paste0(tmpfile, '.attr("r", ', eval(arguments$radius), ")")
-    } else
+  } else
     tmpfile <- paste0(tmpfile, '.attr("r", 5)')
 
-tmpfile <- paste0(tmpfile,
-'
+  tmpfile <- paste0(tmpfile,
+                    '
   .append("title")
   .text(function(d){
     return d.id;
@@ -50,6 +50,6 @@ tmpfile <- paste0(tmpfile,
 };
 render(dataset);
 ')
-tmpfile <- paste0(tmpfile, close_html())
-show_d3(tmpfile, ...)
+  tmpfile <- paste0(tmpfile, close_html())
+  show_d3(tmpfile, ...)
 }
