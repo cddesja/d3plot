@@ -24,9 +24,8 @@ function type (d){
   d.y = +d.y;
 return d;
 };')
-
-  tmpfile <- paste0(tmpfile, setup_canvas(arguments),' function render(data) {', setup_axes(),'
-
+  
+  tmpfile <- paste0(tmpfile,setup_canvas(arguments),' function render(data) {', setup_axes(arguments),'
 // Enter/binding
 svg.selectAll("circle")
   .data(data)
@@ -52,8 +51,8 @@ svg.selectAll("circle")
   if(any(names(arguments) == "stroke")){
     tmpfile <- paste0(tmpfile, '.attr("stroke", ', eval(arguments$stroke), ")")
   }
-
-
+  
+  
   tmpfile <- paste0(tmpfile,
                     '
   .append("title")
