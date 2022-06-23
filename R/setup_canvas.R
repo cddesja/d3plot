@@ -1,19 +1,22 @@
 setup_canvas <- function(...){
   setup <- paste0('
-  const heightValue = 600;
+  const heightValue = 500;
   const widthValue = 500;
   const margin = {top: 50, right: 50, bottom: 60, left: 50},
-  width = heightValue - margin.left - margin.right,
-  height = widthValue - margin.top - margin.bottom
+  width = widthValue - margin.left - margin.right,
+  height = heightValue - margin.top - margin.bottom
   yTicks = 5;
 
   const color = d3.scaleOrdinal(d3.schemeCategory10);
-
+  
+  const svg = d3.select("body").append("svg")
+  .attr("viewBox", `0 0 ${widthValue} ${heightValue}`);
+  
   const xScale = d3.scaleLinear()
-  .range([0, width]);
+  .range([margin.left, widthValue - margin.right]);
 
   const yScale = d3.scaleLinear()
-  .range([height, 0]);
+  .range([heightValue - margin.bottom, margin.top]);
 
   const xAxisBot = d3.axisBottom()
   .scale(xScale)
@@ -36,11 +39,6 @@ setup_canvas <- function(...){
   .ticks(yTicks)
   .tickFormat("")
   .tickSizeOuter(0);
-
-  const svg = d3.select("body").append("svg")
-  .attr("width", width + margin.left + margin.right)
-  .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-  .attr("transform", "translate(" + margin.left + "," + margin.top + ")");')
+                  ')
   return(setup)
 }
