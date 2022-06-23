@@ -32,6 +32,8 @@ svg.selectAll("circle")
   .enter().append("circle")
   .attr("cx", function (d) { return xScale(d.x); })
   .attr("cy", function (d) { return yScale(d.y); })')
+  if(any(names(arguments) == "strokeMatch")){
+    tmpfile <- paste0(tmpfile, '.style("stroke", function(d) { return color(d.color); })')}
   if(grepl("color", data)){
     tmpfile <- paste0(tmpfile, '.attr("fill", function(d) { return color(d.color); })')
   } else tmpfile <- paste0(tmpfile, '.attr("fill", "black")')
@@ -39,20 +41,6 @@ svg.selectAll("circle")
     tmpfile <- paste0(tmpfile, '.attr("r", ', eval(arguments$radius), ")")
   } else
     tmpfile <- paste0(tmpfile, '.attr("r", 5)')
-  if(any(names(arguments) == "opacity")){
-    tmpfile <- paste0(tmpfile, '.attr("opacity", ', eval(arguments$opacity), ")")
-  }
-  ## --------------------------------------- ##
-  ## stroke width and stroke not working yet ##
-  ## --------------------------------------- ##
-  if(any(names(arguments) == "stroke_width")){
-    tmpfile <- paste0(tmpfile, '.attr("stroke-width", ', eval(arguments$stroke_width), ")")
-  }
-  if(any(names(arguments) == "stroke")){
-    tmpfile <- paste0(tmpfile, '.attr("stroke", ', eval(arguments$stroke), ")")
-  }
-  
-  
   tmpfile <- paste0(tmpfile,
                     '
   .append("title")
