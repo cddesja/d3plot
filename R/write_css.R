@@ -13,7 +13,27 @@ write_css <- function(arguments){
   } else {
     css <- paste0(css,  "Helvetica;}")
   }
-  css <- paste0(css, " circle { stroke-width: 2px; } line { stroke-width: 2px; } .tick line { stroke: black; stroke-width: 1; } .axis path{ stroke: #3D1F1F; fill: none; stroke-width: 1; } .axis text { shape-rendering: crispEdges; fill: #3D1F1F;}")
+  css <- paste0(css, " 
+    circle {
+      ")
+      if(any(names(arguments) == "stroke-width")){
+        css <- paste0(css, 'stroke-width:', eval(arguments$stroke-width), "px;")
+      }
+      css <- paste0(css, "
+      ")
+      if(any(names(arguments) == "stroke")){
+        css <- paste0(css, 'stroke:', eval(arguments$stroke), ";")
+      }
+      css <- paste0(css, "
+      ")
+      if(any(names(arguments) == "opacity")){
+        css <- paste0(css, 'fill-opacity:', eval(arguments$opacity), ";")
+      }
+      css <- paste0(css, "
+      } 
+    line { stroke-width: 2px; } 
+    .tick line { stroke: black; stroke-width: 1; } 
+    .axis path{ stroke: #3D1F1F; fill: none; stroke-width: 1; } 
+    .axis text { shape-rendering: crispEdges; fill: #3D1F1F;}")
   return(css)
 }
-
