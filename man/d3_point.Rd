@@ -10,6 +10,8 @@ d3_point(data, ...)
 \item{data}{data in JSON format, created by d3plot() or from another source}
 
 \item{...}{additional, optional arguments}
+
+\item{stroke}{color that is assigned the outside of the point}
 }
 \description{
 \code{d3_point} creates a D3 scatter plot. It takes data either directly or passed to it from \code{\link{d3plot}} function.

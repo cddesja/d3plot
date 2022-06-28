@@ -3,6 +3,7 @@
 #'  \code{d3_point} creates a D3 scatter plot. It takes data either directly or passed to it from \code{\link{d3plot}} function.
 #' @export
 #' @param data data in JSON format, created by d3plot() or from another source
+#' @param stroke color that is assigned the outside of the point
 #' @param ... additional, optional arguments
 #'
 #' @examples
@@ -24,7 +25,7 @@ function type (d){
   d.y = +d.y;
 return d;
 };')
-  
+
   tmpfile <- paste0(tmpfile,setup_canvas(arguments),' function render(data) {', setup_axes(arguments),'
 // Enter/binding
 svg.selectAll("circle")

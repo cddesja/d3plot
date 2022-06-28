@@ -32,10 +32,15 @@ d3plot <- function(x, y, data = NULL, ...){
     x <- eval(arguments$x, data)
     y <- eval(arguments$y, data)
     tmp.data <- data.frame(x = x, y = y)
+    if(any(names(arguments) == "z"))
+      tmp.data$z <- eval(arguments$z, data)
+
     if(any(names(arguments) == "group"))
       tmp.data$group <- eval(arguments$group, data)
+
     if(any(names(arguments) == "color"))
       tmp.data$color <- eval(arguments$color, data)
+
     if(any(names(arguments) == "id"))
       tmp.data$id <- eval(arguments$id, data)
   }

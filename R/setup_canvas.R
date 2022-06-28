@@ -8,10 +8,10 @@ setup_canvas <- function(arguments){
   yTicks = 5;
 
   const color = d3.scaleOrdinal(d3.schemeCategory10);
-  
+
   const svg = d3.select("body").append("svg")
   .attr("viewBox", `0 0 ${widthValue} ${heightValue}`);
-  
+
   const xScale = d3.scaleLinear()
   .range([margin.left, widthValue - margin.right]);
 
