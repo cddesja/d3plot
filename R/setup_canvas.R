@@ -1,43 +1,58 @@
-setup_canvas <- function(...){
-  setup <- paste0('var margin = {top: 50, right: 50, bottom: 30, left: 50},
-  width = 600 - margin.left - margin.right,
-  height = 500 - margin.top - margin.bottom
+setup_canvas <- function(arguments){
+  setup <- paste0('
+  const heightValue = 500;
+  const widthValue = 500;
+  const margin = {top: 50, right: 50, bottom: 60, left: 50},
+  width = widthValue - margin.left - margin.right,
+  height = heightValue - margin.top - margin.bottom
   yTicks = 5;
 
-  var color = d3.scaleOrdinal(d3.schemeCategory10);
+  const color = d3.scaleOrdinal(d3.schemeCategory10);
+  
+  const svg = d3.select("body").append("svg")
+  .attr("viewBox", `0 0 ${widthValue} ${heightValue}`);
+  
+  const xScale = d3.scaleLinear()
+  .range([margin.left, widthValue - margin.right]);
 
-  var xScale = d3.scaleLinear()
-  .range([0, width]);
+  const yScale = d3.scaleLinear()
+  .range([heightValue - margin.bottom, margin.top]);
 
-  var yScale = d3.scaleLinear()
-  .range([height, 0]);
+  const xAxisBot = d3.axisBottom()
+  .scale(xScale)
+  .ticks(yTicks)')
+  if(any(names(arguments) == "xGrid")){
+    setup <- paste0(setup, '.tickSize(-height)')
+  }
+  setup <- paste0(setup, '
+  .tickSizeOuter(0);
 
-  var xAxisBot = d3.axisBottom()
+  const xAxisTop = d3.axisTop()
   .scale(xScale)
   .ticks(yTicks)
+  .tickFormat("")')
+  if(any(names(arguments) == "xGrid")){
+    setup <- paste0(setup, '.tickSize(0)')
+  } else setup <- paste0(setup,'.tickSizeOuter(0);')
+  setup <- paste0(setup, '
+
+  const yAxisLeft = d3.axisLeft()
+  .scale(yScale)
+  .ticks(yTicks)')
+  if(any(names(arguments) == "yGrid")){
+    setup <- paste0(setup, '.tickSize(-width)')
+  }
+  setup <- paste0(setup, '
   .tickSizeOuter(0);
 
-  var xAxisTop = d3.axisTop()
-  .scale(xScale)
-  .ticks(yTicks)
-  .tickFormat("")
-  .tickSizeOuter(0);
-
-  var yAxisLeft = d3.axisLeft()
+  const yAxisRight = d3.axisRight()
   .scale(yScale)
   .ticks(yTicks)
-  .tickSizeOuter(0);
-
-  var yAxisRight = d3.axisRight()
-  .scale(yScale)
-  .ticks(yTicks)
-  .tickFormat("")
-  .tickSizeOuter(0);
-
-  var svg = d3.select("body").append("svg")
-  .attr("width", width + margin.left + margin.right)
-  .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-  .attr("transform", "translate(" + margin.left + "," + margin.top + ")");')
+  .tickFormat("")')
+  if(any(names(arguments) == "yGrid")){
+    setup <- paste0(setup, '.tickSize(0)')
+  } else setup <- paste0(setup,'.tickSizeOuter(0);')
+  setup <- paste0(setup, '
+                  ')
   return(setup)
 }
