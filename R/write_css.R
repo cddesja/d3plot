@@ -37,7 +37,12 @@ write_css <- function(arguments){
         css <- paste0(css, 'stroke:', eval(arguments$gridColor), ";")
       }
       css <- paste0(css, "
-    stroke-width: 1; } 
+      stroke-width: 1;")
+      if(any(names(arguments) == "gridOpacity")){
+        css <- paste0(css, 'opacity:', eval(arguments$gridOpacity), ";")
+      }
+      css <- paste0(css, "
+      } 
     .axis path{ stroke: #3D1F1F; fill: none; stroke-width: 1; } 
     .axis text { shape-rendering: crispEdges; fill: #3D1F1F;}")
   return(css)
