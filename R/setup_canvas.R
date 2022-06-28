@@ -1,4 +1,4 @@
-setup_canvas <- function(...){
+setup_canvas <- function(arguments){
   setup <- paste0('
   const heightValue = 500;
   const widthValue = 500;
@@ -31,14 +31,21 @@ setup_canvas <- function(...){
 
   const yAxisLeft = d3.axisLeft()
   .scale(yScale)
-  .ticks(yTicks)
+  .ticks(yTicks)')
+  if(any(names(arguments) == "yGrid")){
+    setup <- paste0(setup, '.tickSize(-width)')
+  }
+  setup <- paste0(setup, '
   .tickSizeOuter(0);
 
   const yAxisRight = d3.axisRight()
   .scale(yScale)
   .ticks(yTicks)
-  .tickFormat("")
-  .tickSizeOuter(0);
+  .tickFormat("")')
+  if(any(names(arguments) == "yGrid")){
+    setup <- paste0(setup, '.tickSize(0)')
+  } else setup <- paste0(setup,'.tickSizeOuter(0);')
+  setup <- paste0(setup, '
                   ')
   return(setup)
 }
