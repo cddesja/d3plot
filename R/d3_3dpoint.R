@@ -124,19 +124,34 @@ d3.select("html").style("height","1200px").style("width","1000px")
               }
 
               // Assign key to axis, creating or updating its ticks, grid lines, and labels.
- var cirColor = d3.scale.category10();
+var cirColor = d3.scale.category10();
               function drawAxis( axisIndex, key, duration ) {
 
 
-              var scale = d3.scale.linear()
+var scale = d3.scale.linear()
+              .domain( [1,10] ) // demo data range
+              .range( axisRange )
+
+var xScale = d3.scale.linear()
+              .domain( [1,10] ) // demo data range
+              .range( axisRange )
+
+var yScale = d3.scale.linear()
               .domain( [1,8] ) // demo data range
               .range( axisRange )
 
-              scales[axisIndex] = scale;
+var zScale = d3.scale.linear()
+              .domain( [1,8] ) // demo data range
+              .range( axisRange )
 
-              var numTicks = 5;
-              var tickSize = 0.1;
-              var tickFontSize = 0.5;
+
+scales[0] = xScale;
+scales[1] = yScale;
+scales[2] = zScale;
+
+var numTicks = 5;
+var tickSize = 0.1;
+var tickFontSize = 0.5;
 
 
 
@@ -181,17 +196,6 @@ d3.select("html").style("height","1200px").style("width","1000px")
               var gridLines = scene.selectAll( "."+axisName("GridLine", axisIndex))
               .data(scale.ticks( numTicks ));
               gridLines.exit().remove();
-
-           //   var newGridLines = gridLines.enter()
-          //    .append("transform")
-          //    .attr("class", axisName("GridLine", axisIndex))
-         //     .attr("rotation", axisIndex==0 ? [0,1,0, -Math.PI/2] : [0,0,0,0])
-         //     .append("shape")
-
-         //     newGridLines.append("appearance")
-         //     .append("material")
-         //     .attr("emissiveColor", "red")
-        //      newGridLines.append("polyline2d");
 
               gridLines.selectAll("shape polyline2d").transition().duration(duration)
               .attr("lineSegments", "0 0, " + axisRange[1] + " 0")
@@ -267,33 +271,6 @@ d3.select("html").style("height","1200px").style("width","1000px")
               .attr("scale",
               function(row) { return [1, y(row[axisKeys[1]])]; })
               }
-
-
-
-             // function initializeDataGrid() {
-          //    var rows = [];
-              // Follow the convention where y(x,z) is elevation.
-            //  for (var x=-5; x<=5; x+=1) {
-           //   for (var z=-5; z<=5; z+=1) {
-          //    rows.push({x: x, y: 0, z: z});
-          //    }
-          //    }
-          //    return rows;
-          //    }
-
-             // function updateData() {
-            //  time += Math.PI/8;
-            //  if ( x3d.node() && x3d.node().runtime ) {
-            //  for (var r=0; r<rows.length; ++r) {
-            //  var x = rows[r].x;
-          //    var z = rows[r].z;
-          //    rows[r].y = 5*( Math.sin(0.5*x + time) * Math.cos(0.25*z + time));
-          //    }
-          //    plotData( defaultDuration );
-          //    } else {
-          //    console.log("x3d not ready.");
-          //    }
-          //    }
 
              // initializeDataGrid();
               initializePlot();
