@@ -32,7 +32,12 @@ write_css <- function(arguments){
       css <- paste0(css, "
       } 
     line { stroke-width: 2px; } 
-    .tick line { stroke: black; stroke-width: 1; } 
+    .tick line { ")
+      if(any(names(arguments) == "gridColor")){
+        css <- paste0(css, 'stroke:', eval(arguments$gridColor), ";")
+      }
+      css <- paste0(css, "
+    stroke-width: 1; } 
     .axis path{ stroke: #3D1F1F; fill: none; stroke-width: 1; } 
     .axis text { shape-rendering: crispEdges; fill: #3D1F1F;}")
   return(css)
