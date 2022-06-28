@@ -20,14 +20,21 @@ setup_canvas <- function(arguments){
 
   const xAxisBot = d3.axisBottom()
   .scale(xScale)
-  .ticks(yTicks)
+  .ticks(yTicks)')
+  if(any(names(arguments) == "xGrid")){
+    setup <- paste0(setup, '.tickSize(-height)')
+  }
+  setup <- paste0(setup, '
   .tickSizeOuter(0);
 
   const xAxisTop = d3.axisTop()
   .scale(xScale)
   .ticks(yTicks)
-  .tickFormat("")
-  .tickSizeOuter(0);
+  .tickFormat("")')
+  if(any(names(arguments) == "xGrid")){
+    setup <- paste0(setup, '.tickSize(0)')
+  } else setup <- paste0(setup,'.tickSizeOuter(0);')
+  setup <- paste0(setup, '
 
   const yAxisLeft = d3.axisLeft()
   .scale(yScale)
