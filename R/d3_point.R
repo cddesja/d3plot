@@ -2,8 +2,7 @@
 #'
 #'  \code{d3_point} creates a D3 scatter plot. It takes data either directly or passed to it from \code{\link{d3plot}} function.
 #' @export
-#' @param data data in JSON format, created by d3plot() or from another source
-#' @param stroke color that is assigned the outside of the point
+#' @param data data in JSON format, created by \code{\link{d3plot}} or from another source
 #' @param ... additional, optional arguments
 #'
 #' @examples
