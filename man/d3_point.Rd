@@ -7,9 +7,31 @@
 d3_point(data, ...)
 }
 \arguments{
-\item{data}{data in JSON format, created by \code{\link{d3plot}} or from another source}
+\item{data}{data in JSON format, created by d3plot() or from another source}
 
 \item{...}{additional, optional arguments}
+
+\item{radius}{(optional) Affects the size of the dots, numerical scale}
+
+\item{opacity}{(optional) Affects the opacity of the dot works best with larger radius, 0-1 scale}
+
+\item{stroke}{(optional) Adds an outline to the point works best with larger radius, specify css color}
+
+\item{strokeMatch}{(optional) Matches the outline of the point to the color of the point looks best when opacity >1, boolean}
+
+\item{Title}{(optional) Gives graph a title, string ""}
+
+\item{yTitle}{(optional) Gives y axis a title, string ""}
+
+\item{xTitle}{(optional) Gives x axis a title, string ""}
+
+\item{yGrid}{(optional) Gives graph gridlines from the y ticks, boolean}
+
+\item{xGrid}{(optional) Gives graph gridlines from the x ticks, boolean}
+
+\item{gridColor}{(optional) Affects the color of the gridlines, specify css color}
+
+\item{gridOpacity}{(optional) Affects the opacity of the gridlines, 0-1 scale}
 }
 \description{
 \code{d3_point} creates a D3 scatter plot. It takes data either directly or passed to it from \code{\link{d3plot}} function.
