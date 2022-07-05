@@ -22,6 +22,8 @@
 #' d3_point(d3plot(x = mpg, y = cyl, color = cyl, id = rownames(mtcars), data = mtcars))
 #' # Better
 #' d3plot(x = Sepal.Length, y = Petal.Length, color = Species, data = iris) %>% d3_point(radius = 5)
+#' # With more arguments
+#'  d3_point(d3plot(x = mpg, y = cyl, color = cyl, id = rownames(mtcars), data = mtcars ),radius = 15,opacity = .25,stroke = "black",strokeMatch = 1,yTitle = "Im confused by effect vs affect", Title = "MTCars", xTitle = "MPG",gridColor = "#30c5FF",yGrid = T,xGrid = T, gridOpacity = 1, browser = T)
 #' }
 #' @seealso \code{\link{d3plot}}
 #'
