@@ -8,7 +8,7 @@
 #'@export
 #'@export
 d3_3dpoint <- function(data, ...){
-tmp <- paste0('<!DOCTYPE html >
+  tmp <- paste0('<!DOCTYPE html >
 <html >
        <head>
        <meta http-equiv="X-UA-Compatible" content="chrome=1" />
@@ -17,29 +17,40 @@ tmp <- paste0('<!DOCTYPE html >
        <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
        <script type="text/javascript" src="http://x3dom.org/x3dom/dist/x3dom-full.js"></script>
        <link rel="stylesheet" type="text/css" href="http://www.x3dom.org/download/dev/x3dom.css"/>
+       <style>
+          body { margin: auto;
+            background-color: white;
+          }
+          div { 
+            backgroumd-color: white;
+          }
+          header {
+            background-color: white;
+          }
+       </style>
        </head>
        <body>
+       <header>
+        
+       </header>
        <div id="divPlot"></div>
        <script>
-
 var rows =', data, ';
 
-d3.select("html").style("height","600px").style("width","500px")
-       d3.select("body").style("height","600px").style("width","500px")
-       d3.select("#divPlot").style("width", "600px").style("height", "500px")
+d3.select("html").style("height","100%").style("width","100%")
+       d3.select("body").style("height","100%").style("width","100%")
+       d3.select("#divPlot").style("width", "100%").style("height", "100%")
        var x3d = d3.select("#divPlot")
 .append("x3d")
-              .style( "width", "500px" )
-              .style( "height", "300px")
+              .style( "width", "100%" )
+              .style( "height", "100%")
               .style( "border", "none" )
-
               var scene = x3d.append("scene")
-
               scene.append("orthoviewpoint")
               .attr( "centerOfRotation", [0, 0, 0])
-              .attr( "fieldOfView", [-10, -10, 15, 15])
+              .attr( "fieldOfView", [-9, -17, 17, 17])
               .attr( "orientation", [-0.5, 1, 0.2, 1.12*Math.PI/4])
-              .attr( "position", [6, 6, 15])
+              .attr( "position", [12, 10, 10])
 
             //  var rows = initializeDataGrid();
               var axisRange = [0, 12];

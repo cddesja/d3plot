@@ -2,7 +2,18 @@
 #'
 #'  \code{d3_point} creates a D3 scatter plot. It takes data either directly or passed to it from \code{\link{d3plot}} function.
 #' @export
-#' @param data data in JSON format, created by \code{\link{d3plot}} or from another source
+#' @param data data in JSON format, created by d3plot() or from another source
+#' @param radius (optional) Affects the size of the dots, numerical scale
+#' @param opacity (optional) Affects the opacity of the dot works best with larger radius, 0-1 scale
+#' @param stroke (optional) Adds an outline to the point works best with larger radius, specify css color
+#' @param strokeMatch (optional) Matches the outline of the point to the color of the point looks best when opacity >1, boolean
+#' @param Title (optional) Gives graph a title, string ""
+#' @param yTitle (optional) Gives y axis a title, string ""
+#' @param xTitle (optional) Gives x axis a title, string ""
+#' @param yGrid (optional) Gives graph gridlines from the y ticks, boolean
+#' @param xGrid (optional) Gives graph gridlines from the x ticks, boolean
+#' @param gridColor (optional) Affects the color of the gridlines, specify css color
+#' @param gridOpacity (optional) Affects the opacity of the gridlines, 0-1 scale
 #' @param ... additional, optional arguments
 #'
 #' @examples
@@ -24,7 +35,8 @@ function type (d){
   d.y = +d.y;
 return d;
 };')
-
+  
+  
   tmpfile <- paste0(tmpfile,setup_canvas(arguments),' function render(data) {', setup_axes(arguments),'
 // Enter/binding
 svg.selectAll("circle")
@@ -33,7 +45,8 @@ svg.selectAll("circle")
   .attr("cx", function (d) { return xScale(d.x); })
   .attr("cy", function (d) { return yScale(d.y); })')
   if(any(names(arguments) == "strokeMatch")){
-    tmpfile <- paste0(tmpfile, '.style("stroke", function(d) { return color(d.color); })')}
+    if(eval(arguments$strokeMatch) == T){
+      tmpfile <- paste0(tmpfile, '.style("stroke", function(d) { return color(d.color); })')}}
   if(grepl("color", data)){
     tmpfile <- paste0(tmpfile, '.attr("fill", function(d) { return color(d.color); })')
   } else tmpfile <- paste0(tmpfile, '.attr("fill", "black")')
