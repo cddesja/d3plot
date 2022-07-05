@@ -28,7 +28,7 @@
 
 d3_point <- function(data, ...){
   arguments <- as.list(match.call())[-1]
-  tmpfile <- paste0(write_head(arguments), '
+  tmpfile <- paste0(d3plot:::write_head(arguments), '
 <script type="text/javascript"> var dataset =', data, ';
 function type (d){
   d.x = +d.x;
@@ -37,7 +37,7 @@ return d;
 };')
   
   
-  tmpfile <- paste0(tmpfile,setup_canvas(arguments),' function render(data) {', setup_axes(arguments),'
+  tmpfile <- paste0(tmpfile, d3plot:::setup_canvas(arguments),' function render(data) {', d3plot:::setup_axes(arguments),'
 // Enter/binding
 svg.selectAll("circle")
   .data(data)
@@ -63,6 +63,6 @@ svg.selectAll("circle")
 };
 render(dataset);
 ')
-  tmpfile <- paste0(tmpfile, close_html())
+  tmpfile <- paste0(tmpfile, d3plot:::close_html())
   show_d3(tmpfile, ...)
 }
