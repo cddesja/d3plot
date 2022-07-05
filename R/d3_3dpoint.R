@@ -24,13 +24,13 @@ tmp <- paste0('<!DOCTYPE html >
 
 var rows =', data, ';
 
-d3.select("html").style("height","1200px").style("width","1000px")
-       d3.select("body").style("height","1200px").style("width","1000px")
-       d3.select("#divPlot").style("width", "1200px").style("height", "1000px")
+d3.select("html").style("height","600px").style("width","500px")
+       d3.select("body").style("height","600px").style("width","500px")
+       d3.select("#divPlot").style("width", "600px").style("height", "500px")
        var x3d = d3.select("#divPlot")
 .append("x3d")
-              .style( "width", "1000px" )
-              .style( "height", "600px")
+              .style( "width", "500px" )
+              .style( "height", "300px")
               .style( "border", "none" )
 
               var scene = x3d.append("scene")
