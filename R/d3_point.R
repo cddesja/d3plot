@@ -14,6 +14,7 @@
 #' @param xGrid (optional) Gives graph gridlines from the x ticks, boolean
 #' @param gridColor (optional) Affects the color of the gridlines, specify css color
 #' @param gridOpacity (optional) Affects the opacity of the gridlines, 0-1 scale
+#' @param browser (mandatory/optional) If code editor has viewer browser is optional if not browser opens visual in a browser window
 #' @param ... additional, optional arguments
 #'
 #' @examples
@@ -64,5 +65,5 @@ svg.selectAll("circle")
 render(dataset);
 ')
   tmpfile <- paste0(tmpfile, d3plot:::close_html())
-  show_d3(tmpfile, ...)
+  d3plot:::show_d3(tmpfile, arguments)
 }
