@@ -2,12 +2,15 @@
 #'@examples{
 #'\dontrun[
 #'d3plot(x = Sepal.Length, y = Sepal.Width, z = Petal.Length, color = Species, data = iris) |> d3_3dpoint()
+#' # open in browser by default
+#'d3plot(x = Sepal.Length, y = Sepal.Width, z = Petal.Length, color = Species, data = iris) |> d3_3dpoint(browser = TRUE)
 #'d3plot(x = cyl, y = gear, z = wt, color = vs, data = mtcars) |> d3_3dpoint()
 #']
 #'}
 #'@export
 #'@export
 d3_3dpoint <- function(data, ...){
+  arguments <- as.list(match.call())[-1]
   tmp <- paste0('<!DOCTYPE html >
 <html >
        <head>
@@ -140,7 +143,7 @@ var cirColor = d3.scale.category10();
 
 
 var scale = d3.scale.linear()
-              .domain( [1,10] ) // demo data range
+              .domain( [1,20] ) // demo data range
               .range( axisRange )
 
 var xScale = d3.scale.linear()
@@ -182,6 +185,24 @@ var tickFontSize = 0.5;
               ticks.exit().remove();
 
               // tick labels
+var tickLabels = ticks.selectAll("billboard shape text")
+              .data(function(d) { return [d]; });
+              var newTickLabels = tickLabels.enter()
+              .append("billboard")
+              .attr("axisOfRotation", "0 0 0")
+              .append("shape")
+              .call(makeSolid)
+              newTickLabels.append("text")
+              .attr("string", scale.tickFormat(10))
+              .attr("solid", "true")
+              .append("fontstyle")
+              .attr("size", tickFontSize)
+              .attr("family", "Helvetica")
+              .attr("shape-rendering", "crispEdges")
+              .attr("justify", "END MIDDLE" );
+              tickLabels // enter + update
+              .attr("string", scale.tickFormat(10))
+              tickLabels.exit().remove();
 
 
  // base grid lines
@@ -276,5 +297,5 @@ var tickFontSize = 0.5;
 
 
 ')
-d3plot:::show_d3(tmp)
+d3plot:::show_d3(tmp, arguments)
 }
