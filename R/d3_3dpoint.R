@@ -36,6 +36,7 @@ d3_3dpoint <- function(data, ...){
        <div id="divPlot"></div>
        <script>
 var rows =', data, ';
+
 d3.select("html").style("height","100%").style("width","100%")
        d3.select("body").style("height","100%").style("width","100%")
        d3.select("#divPlot").style("width", "100%").style("height", "100%")
@@ -181,24 +182,7 @@ var tickFontSize = 0.5;
               ticks.exit().remove();
 
               // tick labels
-              var tickLabels = ticks.selectAll("billboard shape text")
-              .data(function(d) { return [d]; });
-              var newTickLabels = tickLabels.enter()
-              .append("billboard")
-              .attr("axisOfRotation", "0 0 0")
-              .append("shape")
-              .call(makeSolid)
-              newTickLabels.append("text")
-              .attr("string", scale.tickFormat(10))
-              .attr("solid", "true")
-              .append("fontstyle")
-              .attr("size", tickFontSize)
-              .attr("family", "Helvetica")
-              .attr("shape-rendering", "crispEdges")
-              .attr("justify", "END MIDDLE" );
-              tickLabels // enter + update
-              .attr("string", scale.tickFormat(10))
-              tickLabels.exit().remove();
+
 
  // base grid lines
               if (axisIndex==0 || axisIndex==2) {
