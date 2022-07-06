@@ -314,8 +314,13 @@ d3_3dpoint <- function(data, ...){
 
         var x = scales[0],
           y = scales[1],
-          z = scales[2];
-        var sphereRadius = 0.15;
+          z = scales[2];')
+        if(any(names(arguments) == "radius")){
+          tmp <- paste0(tmp, 'var sphereRadius = ', eval(arguments$radius), '/100;')
+        } else
+          tmp <- paste0(tmp, 'var sphereRadius = 0.15;')
+        tmp <- paste0(tmp,'
+        
 
         // Draw a sphere at each x,y,z coordinate.
         var datapoints = scene.selectAll(".datapoint").data(rows);
