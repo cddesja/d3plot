@@ -147,8 +147,13 @@ d3_3dpoint <- function(data, ...){
           .append("shape");
         newAxisLine
           .append("appearance")
-          .append("material")
-          .attr("emissiveColor", "black");
+          .append("material")')
+          if(any(names(arguments) == "axisColor")){
+            tmp <- paste0(tmp, '.attr("emissiveColor","', eval(arguments$axisColor), '")')
+          } else
+            tmp <- paste0(tmp, '.attr("emissiveColor", "#788585");')
+          tmp <- paste0(tmp,'
+          
         newAxisLine
           .append("polyline2d")
           // Line drawn along y axis does not render in Firefox, so draw one
