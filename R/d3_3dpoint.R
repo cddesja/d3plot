@@ -343,7 +343,11 @@ d3_3dpoint <- function(data, ...){
           .attr("diffuseColor", "black")
           .attr("diffuseColor", function (rows) {
             return cirColor(rows.color);
-          })
+          })')
+          if(any(names(arguments) == "opacity")){
+            tmp <- paste0(tmp, '.attr("transparency",1-', eval(arguments$opacity), ')')
+          } 
+          tmp <- paste0(tmp,'
           .append("title")
           .text(function (rows) {
             return rows.color;
