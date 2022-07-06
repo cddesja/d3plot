@@ -113,8 +113,13 @@ d3_3dpoint <- function(data, ...){
       function makeSolid(selection, color) {
         selection
           .append("appearance")
-          .append("material")
-          .attr("diffuseColor", color || "black");
+          .append("material")')
+          if(any(names(arguments) == "numberColor")){
+            tmp <- paste0(tmp, '.attr("diffuseColor", color || "', eval(arguments$numberColor), '")')
+          } else
+            tmp <- paste0(tmp, '.attr("diffuseColor", color || "black");')
+          tmp <- paste0(tmp,'
+          
         return selection;
       }
 
