@@ -85,8 +85,21 @@ d3_3dpoint <- function(data, ...){
       scene
         .append("orthoviewpoint")
         .attr("centerOfRotation", [0, 0, 0])
-        .attr("fieldOfView", [-9, -11.5, 17, 17])
-        .attr("orientation", [-0.5, 1, 0.2, (1.12 * Math.PI) / 4])
+        .attr("fieldOfView", [-9, -11.5, 17, 17])')
+        if(any(names(arguments) == "orient")){
+          if ((tolower(eval(arguments$orient)) == "xy"|(tolower(eval(arguments$orient)) == "yx"))){
+            tmp <- paste0(tmp, '.attr("orientation", [0, 0, 0, 0])')
+          } else if ((tolower(eval(arguments$orient)) == "xz"|(tolower(eval(arguments$orient)) == "zx"))){
+            tmp <- paste0(tmp, '.attr("orientation", [1, 0, 0, Math.PI / 2])')
+          } else if ((tolower(eval(arguments$orient)) == "zy")|(tolower(eval(arguments$orient)) == "yz")){
+            tmp <- paste0(tmp, '.attr("orientation", [0, 1, 0, -Math.PI / 2])')
+          } else {
+            tmp <- paste0(tmp, '.attr("orientation", [-0.5, 1, 0.2, (1.12 * Math.PI) / 4])')
+          }
+        } else {
+          tmp <- paste0(tmp, '.attr("orientation", [-0.5, 1, 0.2, (1.12 * Math.PI) / 4])')
+          }
+        tmp <- paste0(tmp,'
         .attr("position", [0, 0, 0]);
 
       //  var rows = initializeDataGrid();
