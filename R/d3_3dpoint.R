@@ -109,7 +109,25 @@ d3_3dpoint <- function(data, ...){
       var defaultDuration = 800;
       var ease = "linear";
       var time = 0;
-      var axisKeys = ["x", "y", "z"];
+      var axisKeys = ["x", "y", "z"];')
+        if(any(names(arguments) == "xTitle")& any(names(arguments) == "yTitle") & any(names(arguments) == "zTitle")){
+          tmp <- paste0(tmp, 'var axisNameKey = ["', eval(arguments$xTitle), '","',eval(arguments$yTitle),'","',eval(arguments$zTitle),'"];')
+        } else if(any(names(arguments) == "xTitle")& any(names(arguments) == "yTitle")){
+          tmp <- paste0(tmp, 'var axisNameKey = ["', eval(arguments$xTitle), '","',eval(arguments$yTitle),'","z"];')
+        } else if(any(names(arguments) == "xTitle")&  any(names(arguments) == "zTitle")){
+          tmp <- paste0(tmp, 'var axisNameKey = ["', eval(arguments$xTitle), '","y","',eval(arguments$zTitle),'"];')
+        } else if(any(names(arguments) == "yTitle") & any(names(arguments) == "zTitle")){
+          tmp <- paste0(tmp, 'var axisNameKey = ["x","',eval(arguments$yTitle),'","',eval(arguments$zTitle),'"];')
+        }else if(any(names(arguments) == "xTitle")){
+          tmp <- paste0(tmp, 'var axisNameKey = ["',eval(arguments$xTitle),'","y","z"];')
+        }else if(any(names(arguments) == "yTitle")){
+          tmp <- paste0(tmp, 'var axisNameKey = ["x","',eval(arguments$yTitle),'","z"];')
+        }else if(any(names(arguments) == "zTitle")){
+          tmp <- paste0(tmp, 'var axisNameKey = ["x","y","',eval(arguments$zTitle),'"];')
+        }else
+          tmp <- paste0(tmp, 'var axisNameKey = ["x", "y", "z"];')
+        tmp <- paste0(tmp,'
+      
 
       // Helper functions for initializeAxis() and drawAxis()
       function axisName(name, axisIndex) {
@@ -146,6 +164,8 @@ d3_3dpoint <- function(data, ...){
       function initializeAxis(axisIndex) {
         var key = axisKeys[axisIndex];
         drawAxis(axisIndex, key, initialDuration);
+        
+        var nameKey = axisNameKey[axisIndex];
 
         var scaleMin = axisRange[0];
         var scaleMax = axisRange[1];
@@ -208,7 +228,7 @@ d3_3dpoint <- function(data, ...){
           .append("text")
           .attr("class", axisName("AxisLabelText", axisIndex))
           .attr("solid", "true")
-          .attr("string", key)
+          .attr("string", nameKey)
           .append("fontstyle")
           .attr("size", labelFontSize)
           .attr("family", "Helvetica")
