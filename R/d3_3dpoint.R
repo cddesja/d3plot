@@ -263,8 +263,12 @@ d3_3dpoint <- function(data, ...){
         scales[1] = yScale;
         scales[2] = zScale;
 
-        var numTicks = 5;
-        var tickSize = 0.1;
+        var numTicks = 5;')
+        if(any(names(arguments) == "tickSize")){
+          tmp <- paste0(tmp, 'var tickSize = ', eval(arguments$tickSize)/100, ';')
+        } else
+          tmp <- paste0(tmp, 'var tickSize = 0.1;')
+        tmp <- paste0(tmp,'
         var tickFontSize = 0.5;
 
         // ticks along each axis
