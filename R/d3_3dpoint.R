@@ -195,9 +195,14 @@ d3_3dpoint <- function(data, ...){
           .append("billboard")
           .attr("axisOfRotation", "0 0 0") // face viewer
           .append("shape")
-          .call(makeSolid);
+          .call(makeSolid);')
 
-        var labelFontSize = 0.6;
+          
+        if(any(names(arguments) == "labelFontSize")){
+          tmp <- paste0(tmp, 'var labelFontSize = ', eval(arguments$labelFontSize), ';')
+        } else
+          tmp <- paste0(tmp, 'var labelFontSize = .6;')
+        tmp <- paste0(tmp,'
 
         newAxisLabelShape
           .append("text")
