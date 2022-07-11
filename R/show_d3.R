@@ -1,8 +1,9 @@
 show_d3 <- function(tmpfile, arguments){
     if(any(names(arguments) == "browser")){
         browser <- eval(arguments$browser)
+    } else {
+        browser <- FALSE
     }
-    
     htmlFile <- tempfile(fileext=".html")
     cat(tmpfile, file = htmlFile)
     
