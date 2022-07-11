@@ -145,8 +145,8 @@ d3_3dpoint <- function(data, ...){
         selection
           .append("appearance")
           .append("material")')
-          if(any(names(arguments) == "numberColor")){
-            tmp <- paste0(tmp, '.attr("diffuseColor", color || "', eval(arguments$numberColor), '")')
+          if(any(names(arguments) == "labelColor")){
+            tmp <- paste0(tmp, '.attr("diffuseColor", color || "', eval(arguments$labelColor), '")')
           } else
             tmp <- paste0(tmp, '.attr("diffuseColor", color || "black");')
           tmp <- paste0(tmp,'
