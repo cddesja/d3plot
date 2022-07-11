@@ -219,7 +219,7 @@ d3_3dpoint <- function(data, ...){
 
           
         if(any(names(arguments) == "labelFontSize")){
-          tmp <- paste0(tmp, 'var labelFontSize = ', eval(arguments$labelFontSize), ';')
+          tmp <- paste0(tmp, 'var labelFontSize = ', eval(arguments$labelFontSize), '/10;')
         } else
           tmp <- paste0(tmp, 'var labelFontSize = .6;')
         tmp <- paste0(tmp,'
