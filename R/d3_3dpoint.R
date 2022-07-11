@@ -6,7 +6,7 @@
 #' @param orient (optional) Affects the starting orientation of the graph, pass in a string with any combination of two axis "Xy"
 #' @param xTitle (optional) Changes the label of the x axis from "x" to specified string
 #' @param yTitle (optional) Changes the label of the y axis from "y" to specified string
-#' @param zTitle (optional) Changes the label of the x axis from "x" to specified string
+#' @param zTitle (optional) Changes the label of the z axis from "z" to specified string
 #' @param labelFontSize (optional) Affects the size of the axis labels, best between 5-20
 #' @param tickSize (optional) Affects the size of axis ticks
 #' @param opacity (optional) Affects the opacity of the dots, 0-1 scale
