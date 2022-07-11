@@ -1,4 +1,18 @@
 #' 3d demo https://gist.github.com/hlvoorhees/5986172
+#' \code {d3_3dpoint} creates a 3d scatter plot.
+#' @export
+#' @param data data in JSON format, created by d3plot() or from another source
+#' @param radius (optional) Affects the size of the dots, numerical scale
+#' @param orient (optional) Affects the starting orientation of the graph, pass in a string with any combination of two axis "Xy"
+#' @param xTitle (optional) Changes the label of the x axis from "x" to specified string
+#' @param yTitle (optional) Changes the label of the y axis from "y" to specified string
+#' @param zTitle (optional) Changes the label of the x axis from "x" to specified string
+#' @param labelFontSize (optional) Affects the size of the axis labels, best between 5-20
+#' @param tickSize (optional) Affects the size of axis ticks
+#' @param opacity (optional) Affects the opacity of the dots, 0-1 scale
+#' @param labelColor (optional) Affects the color of the axis labels and ticks, string css colors
+#' @param axisColor (optional) Affects the color of the axis, string css colors
+#' @param browser (mandatory/optional) If code editor has viewer browser is optional if not browser opens visual in a browser window
 #'@examples{
 #'\dontrun[
 #'d3plot(x = Sepal.Length, y = Sepal.Width, z = Petal.Length, color = Species, data = iris) |> d3_3dpoint()
