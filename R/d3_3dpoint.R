@@ -7,11 +7,15 @@
 #' @param xLabel (optional) Changes the label of the x axis from "x" to specified string
 #' @param yLabel (optional) Changes the label of the y axis from "y" to specified string
 #' @param zLabel (optional) Changes the label of the x axis from "x" to specified string
-#' @param labelFontSize (optional) Affects the size of the axis labels, best between 5-20
-#' @param tickSize (optional) Affects the size of axis ticks
+#' @param dataMargin (optional) Affects the margin of domain around the data, numerical percentage 0-100
+#' @param labelFontSize (optional) Affects the size of the axis labels, numerical best between 5-20
+#' @param numTicks (optional) Affects the number of ticks, numerical
+#' @param tickSize (optional) Affects the size of axis ticks, numerical
 #' @param opacity (optional) Affects the opacity of the dots, 0-1 scale
 #' @param labelColor (optional) Affects the color of the axis labels and ticks, string css colors
 #' @param axisColor (optional) Affects the color of the axis, string css colors
+#' @param stems (optional) Adds stems that connect to each point, boolean
+#' @param stemsOpacity (optional) Affects the opacirt of the stems, 0-1 scale
 #' @param browser (mandatory/optional) If code editor has viewer browser is optional if not browser opens visual in a browser window
 #'@examples{
 #'\dontrun[
