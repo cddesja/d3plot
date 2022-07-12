@@ -438,9 +438,9 @@ d3_3dpoint <- function(data, ...){
           .append("material")')
           if(any(names(arguments) == "stems")){
             if(eval(arguments$stems) == T){
-              tmp <- paste0(tmp, '.attr("emissiveColor", "black");')}
-          } else tmp <- paste0(tmp,'.attr("emissiveColor", none);')
-          tmp <- paste0(tmp, '
+              tmp <- paste0(tmp, '.attr("emissiveColor", function (rows) { return cirColor(rows.color);})')}
+          } else tmp <- paste0(tmp,'.attr("emissiveColor", none)')
+          tmp <- paste0(tmp, ';
   
         newStems.append("polyline2d").attr("lineSegments", function (row) {
           return "0 1, 0 0";
