@@ -8,6 +8,12 @@
 #' @param yLabel (optional) Changes the label of the y axis from "y" to specified string
 #' @param zLabel (optional) Changes the label of the x axis from "x" to specified string
 #' @param dataMargin (optional) Affects the margin of domain around the data, numerical percentage 0-100
+#' @param xMin (optional) Changes the start of the x axis domain to the specified number, numerical
+#' @param xMax (optional) Changes the end of the x axis domain to the specified number, numerical
+#' @param yMin (optional) Changes the start of the y axis domain to the specified number, numerical
+#' @param yMax (optional) Changes the end of the y axis domain to the specified number, numerical
+#' @param zMin (optional) Changes the start of the z axis domain to the specified number, numerical
+#' @param zMax (optional) Changes the end of the z axis domain to the specified number, numerical
 #' @param labelFontSize (optional) Affects the size of the axis labels, numerical best between 5-20
 #' @param numTicks (optional) Affects the number of ticks, numerical
 #' @param tickSize (optional) Affects the size of axis ticks, numerical
