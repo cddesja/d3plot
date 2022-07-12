@@ -273,31 +273,100 @@ d3_3dpoint <- function(data, ...){
         var scale = d3.scale
           .linear()
           .domain([1, 10]) // sets the axis tick labels
-          .range(axisRange); // range refers to length in px of axis
-
-        var xScale = d3.scale
-          .linear()
-          .domain([
-            d3.min(rows, (d) => d.x) - xBuff,
-            d3.max(rows, (d) => d.x) + xBuff,
-          ]) // demo data range
-          .range(axisRange); // range refers to length in px of axis
-
-        var yScale = d3.scale
-          .linear()
-          .domain([
-            d3.min(rows, (d) => d.y) - yBuff,
-            d3.max(rows, (d) => d.y) + yBuff,
-          ]) // demo data range
-          .range(axisRange); // range refers to length in px of axis
-
-        var zScale = d3.scale
-          .linear()
-          .domain([
-            d3.min(rows, (d) => d.z) - zBuff,
-            d3.max(rows, (d) => d.z) + zBuff,
-          ]) // demo data range
-          .range(axisRange); // range refers to length in px of axis
+          .range(axisRange); // range refers to length in px of axis')
+        
+        if(any(names(arguments) == "xMin")& any(names(arguments) == "xMax")){
+          tmp <- paste0(tmp, '
+            var xScale = d3.scale
+              .linear()
+              .domain([', eval(arguments$xMin), ',',eval(arguments$xMax),'])
+              .range(axisRange); // range refers to length in px of axis')
+        } else if(any(names(arguments) == "xMin")){
+          tmp <- paste0(tmp, '
+            var xScale = d3.scale
+              .linear()
+              .domain([', eval(arguments$xMin), ',d3.max(rows, (d) => d.x) + xBuff])
+              .range(axisRange); // range refers to length in px of axis')
+        } else if(any(names(arguments) == "xMax")){
+          tmp <- paste0(tmp, '
+            var xScale = d3.scale
+              .linear()
+              .domain([d3.min(rows, (d) => d.x) - xBuff,', eval(arguments$xMax), '])
+              .range(axisRange); // range refers to length in px of axis')
+        } else {
+          tmp <- paste0(tmp, '
+            var xScale = d3.scale
+              .linear()
+              .domain([
+                d3.min(rows, (d) => d.x) - xBuff,
+                d3.max(rows, (d) => d.x) + xBuff,
+              ]) // demo data range
+              .range(axisRange); // range refers to length in px of axis             
+          ')
+        }
+        tmp <- paste0(tmp,'')
+        
+        if(any(names(arguments) == "yMin")& any(names(arguments) == "yMax")){
+          tmp <- paste0(tmp, '
+            var yScale = d3.scale
+              .linear()
+              .domain([', eval(arguments$yMin), ',',eval(arguments$yMax),'])
+              .range(axisRange); // range refers to length in px of axis')
+        } else if(any(names(arguments) == "yMin")){
+          tmp <- paste0(tmp, '
+            var yScale = d3.scale
+              .linear()
+              .domain([', eval(arguments$yMin), ',d3.max(rows, (d) => d.y) + yBuff])
+              .range(axisRange); // range refers to length in px of axis')
+        } else if(any(names(arguments) == "yMax")){
+          tmp <- paste0(tmp, '
+            var yScale = d3.scale
+              .linear()
+              .domain([d3.min(rows, (d) => d.y) - yBuff,', eval(arguments$yMax), '])
+              .range(axisRange); // range refers to length in px of axis')
+        } else {
+          tmp <- paste0(tmp, '
+            var yScale = d3.scale
+              .linear()
+              .domain([
+                d3.min(rows, (d) => d.y) - yBuff,
+                d3.max(rows, (d) => d.y) + yBuff,
+              ]) // demo data range
+              .range(axisRange); // range refers to length in px of axis             
+          ')
+        }
+        tmp <- paste0(tmp,'')
+        
+        if(any(names(arguments) == "zMin")& any(names(arguments) == "zMax")){
+          tmp <- paste0(tmp, '
+            var zScale = d3.scale
+              .linear()
+              .domain([', eval(arguments$zMin), ',',eval(arguments$zMax),'])
+              .range(axisRange); // range refers to length in px of axis')
+        } else if(any(names(arguments) == "zMin")){
+          tmp <- paste0(tmp, '
+            var zScale = d3.scale
+              .linear()
+              .domain([', eval(arguments$zMin), ',d3.max(rows, (d) => d.z) + zBuff])
+              .range(axisRange); // range refers to length in px of axis')
+        } else if(any(names(arguments) == "zMax")){
+          tmp <- paste0(tmp, '
+            var zScale = d3.scale
+              .linear()
+              .domain([d3.min(rows, (d) => d.z) - zBuff,', eval(arguments$zMax), '])
+              .range(axisRange); // range refers to length in px of axis')
+        } else {
+          tmp <- paste0(tmp, '
+            var zScale = d3.scale
+              .linear()
+              .domain([
+                d3.min(rows, (d) => d.z) - zBuff,
+                d3.max(rows, (d) => d.z) + zBuff,
+              ]) // demo data range
+              .range(axisRange); // range refers to length in px of axis             
+          ')
+        }
+        tmp <- paste0(tmp,'
 
         scales[0] = xScale;
         scales[1] = yScale;
