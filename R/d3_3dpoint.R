@@ -6,7 +6,7 @@
 #' @param orient (optional) Affects the starting orientation of the graph, pass in a string with any combination of two axis "Xy"
 #' @param xTitle (optional) Changes the label of the x axis from "x" to specified string
 #' @param yTitle (optional) Changes the label of the y axis from "y" to specified string
-#' @param zTitle (optional) Changes the label of the z axis from "z" to specified string
+#' @param zTitle (optional) Changes the label of the x axis from "x" to specified string
 #' @param labelFontSize (optional) Affects the size of the axis labels, best between 5-20
 #' @param tickSize (optional) Affects the size of axis ticks
 #' @param opacity (optional) Affects the opacity of the dots, 0-1 scale
@@ -260,17 +260,17 @@ d3_3dpoint <- function(data, ...){
 
         var xScale = d3.scale
           .linear()
-          .domain([4, 8]) // demo data range
+          .domain([d3.min(rows, (d) => d.x), d3.max(rows, (d) => d.x)]) // demo data range
           .range(axisRange); // range refers to length in px of axis
 
         var yScale = d3.scale
           .linear()
-          .domain([2, 4.5]) // demo data range
+          .domain([d3.min(rows, (d) => d.y), d3.max(rows, (d) => d.y)]) // demo data range
           .range(axisRange); // range refers to length in px of axis
 
         var zScale = d3.scale
           .linear()
-          .domain([1, 7]) // demo data range
+          .domain([d3.min(rows, (d) => d.z), d3.max(rows, (d) => d.z)]) // demo data range
           .range(axisRange); // range refers to length in px of axis
 
         scales[0] = xScale;
@@ -436,7 +436,7 @@ d3_3dpoint <- function(data, ...){
         newStems
           .append("appearance")
           .append("material")
-          .attr("emissiveColor", none);
+          .attr("emissiveColor", blue);
         newStems.append("polyline2d").attr("lineSegments", function (row) {
           return "0 1, 0 0";
         });
