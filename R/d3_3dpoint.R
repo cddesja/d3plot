@@ -4,9 +4,9 @@
 #' @param data data in JSON format, created by d3plot() or from another source
 #' @param radius (optional) Affects the size of the dots, numerical scale
 #' @param orient (optional) Affects the starting orientation of the graph, pass in a string with any combination of two axis "Xy"
-#' @param xTitle (optional) Changes the label of the x axis from "x" to specified string
-#' @param yTitle (optional) Changes the label of the y axis from "y" to specified string
-#' @param zTitle (optional) Changes the label of the x axis from "x" to specified string
+#' @param xLabel (optional) Changes the label of the x axis from "x" to specified string
+#' @param yLabel (optional) Changes the label of the y axis from "y" to specified string
+#' @param zLabel (optional) Changes the label of the x axis from "x" to specified string
 #' @param labelFontSize (optional) Affects the size of the axis labels, best between 5-20
 #' @param tickSize (optional) Affects the size of axis ticks
 #' @param opacity (optional) Affects the opacity of the dots, 0-1 scale
@@ -124,20 +124,20 @@ d3_3dpoint <- function(data, ...){
       var ease = "linear";
       var time = 0;
       var axisKeys = ["x", "y", "z"];')
-        if(any(names(arguments) == "xTitle")& any(names(arguments) == "yTitle") & any(names(arguments) == "zTitle")){
-          tmp <- paste0(tmp, 'var axisNameKey = ["', eval(arguments$xTitle), '","',eval(arguments$yTitle),'","',eval(arguments$zTitle),'"];')
-        } else if(any(names(arguments) == "xTitle")& any(names(arguments) == "yTitle")){
-          tmp <- paste0(tmp, 'var axisNameKey = ["', eval(arguments$xTitle), '","',eval(arguments$yTitle),'","z"];')
-        } else if(any(names(arguments) == "xTitle")&  any(names(arguments) == "zTitle")){
-          tmp <- paste0(tmp, 'var axisNameKey = ["', eval(arguments$xTitle), '","y","',eval(arguments$zTitle),'"];')
-        } else if(any(names(arguments) == "yTitle") & any(names(arguments) == "zTitle")){
-          tmp <- paste0(tmp, 'var axisNameKey = ["x","',eval(arguments$yTitle),'","',eval(arguments$zTitle),'"];')
-        }else if(any(names(arguments) == "xTitle")){
-          tmp <- paste0(tmp, 'var axisNameKey = ["',eval(arguments$xTitle),'","y","z"];')
-        }else if(any(names(arguments) == "yTitle")){
-          tmp <- paste0(tmp, 'var axisNameKey = ["x","',eval(arguments$yTitle),'","z"];')
-        }else if(any(names(arguments) == "zTitle")){
-          tmp <- paste0(tmp, 'var axisNameKey = ["x","y","',eval(arguments$zTitle),'"];')
+        if(any(names(arguments) == "xLabel")& any(names(arguments) == "yLabel") & any(names(arguments) == "zLabel")){
+          tmp <- paste0(tmp, 'var axisNameKey = ["', eval(arguments$xLabel), '","',eval(arguments$yLabel),'","',eval(arguments$zLabel),'"];')
+        } else if(any(names(arguments) == "xLabel")& any(names(arguments) == "yLabel")){
+          tmp <- paste0(tmp, 'var axisNameKey = ["', eval(arguments$xLabel), '","',eval(arguments$yLabel),'","z"];')
+        } else if(any(names(arguments) == "xLabel")&  any(names(arguments) == "zLabel")){
+          tmp <- paste0(tmp, 'var axisNameKey = ["', eval(arguments$xLabel), '","y","',eval(arguments$zLabel),'"];')
+        } else if(any(names(arguments) == "yLabel") & any(names(arguments) == "zLabel")){
+          tmp <- paste0(tmp, 'var axisNameKey = ["x","',eval(arguments$yLabel),'","',eval(arguments$zLabel),'"];')
+        }else if(any(names(arguments) == "xLabel")){
+          tmp <- paste0(tmp, 'var axisNameKey = ["',eval(arguments$xLabel),'","y","z"];')
+        }else if(any(names(arguments) == "yLabel")){
+          tmp <- paste0(tmp, 'var axisNameKey = ["x","',eval(arguments$yLabel),'","z"];')
+        }else if(any(names(arguments) == "zLabel")){
+          tmp <- paste0(tmp, 'var axisNameKey = ["x","y","',eval(arguments$zLabel),'"];')
         }else
           tmp <- paste0(tmp, 'var axisNameKey = ["x", "y", "z"];')
         tmp <- paste0(tmp,'
