@@ -338,18 +338,18 @@
 
         var xScale = d3.scale
           .linear()
-          .domain([1, 10]) // demo data range
-          .range(axisRange);
+          .domain([d3.min(rows, (d) => d.x), d3.max(rows, (d) => d.x)]) // demo data range
+          .range(axisRange); // range refers to length in px of axis
 
         var yScale = d3.scale
           .linear()
-          .domain([1, 8]) // demo data range
-          .range(axisRange);
+          .domain([d3.min(rows, (d) => d.y), d3.max(rows, (d) => d.y)]) // demo data range
+          .range(axisRange); // range refers to length in px of axis
 
         var zScale = d3.scale
           .linear()
-          .domain([1, 8]) // demo data range
-          .range(axisRange);
+          .domain([d3.min(rows, (d) => d.z), d3.max(rows, (d) => d.z)]) // demo data range
+          .range(axisRange); // range refers to length in px of axis
 
         scales[0] = xScale;
         scales[1] = yScale;
