@@ -253,6 +253,19 @@ d3_3dpoint <- function(data, ...){
       var cirColor = d3.scale.category10();
 
       function drawAxis(axisIndex, key, duration) {
+        ')
+        if(any(names(arguments) == "dataMargin")){
+          tmp <- paste0(tmp, 'var dataMargin = ', eval(arguments$dataMargin)/100, ';')
+        } else
+          tmp <- paste0(tmp, 'var dataMargin = 0;')
+        tmp <- paste0(tmp,'
+        var xBuff =
+          (d3.max(rows, (d) => d.x) - d3.min(rows, (d) => d.x)) * dataMargin;
+        var yBuff =
+          (d3.max(rows, (d) => d.y) - d3.min(rows, (d) => d.y)) * dataMargin;
+        var zBuff =
+          (d3.max(rows, (d) => d.z) - d3.min(rows, (d) => d.z)) * dataMargin;
+      
         var scale = d3.scale
           .linear()
           .domain([1, 10]) // sets the axis tick labels
@@ -260,17 +273,26 @@ d3_3dpoint <- function(data, ...){
 
         var xScale = d3.scale
           .linear()
-          .domain([d3.min(rows, (d) => d.x), d3.max(rows, (d) => d.x)]) // demo data range
+          .domain([
+            d3.min(rows, (d) => d.x) - xBuff,
+            d3.max(rows, (d) => d.x) + xBuff,
+          ]) // demo data range
           .range(axisRange); // range refers to length in px of axis
 
         var yScale = d3.scale
           .linear()
-          .domain([d3.min(rows, (d) => d.y), d3.max(rows, (d) => d.y)]) // demo data range
+          .domain([
+            d3.min(rows, (d) => d.y) - yBuff,
+            d3.max(rows, (d) => d.y) + yBuff,
+          ]) // demo data range
           .range(axisRange); // range refers to length in px of axis
 
         var zScale = d3.scale
           .linear()
-          .domain([d3.min(rows, (d) => d.z), d3.max(rows, (d) => d.z)]) // demo data range
+          .domain([
+            d3.min(rows, (d) => d.z) - zBuff,
+            d3.max(rows, (d) => d.z) + zBuff,
+          ]) // demo data range
           .range(axisRange); // range refers to length in px of axis
 
         scales[0] = xScale;
