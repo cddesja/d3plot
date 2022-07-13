@@ -390,54 +390,203 @@ d3_3dpoint <- function(data, ...){
           tmp <- paste0(tmp, 'var tickSize = 0.1;')
         tmp <- paste0(tmp,'
         
-        var tickFontSize = 0.5;
+        var tickFontSize = 0.5;')
 
-        // ticks along each axis
-        var ticks = scene
-          .selectAll("." + axisName("Tick", axisIndex))
-          .data(scale.ticks(numTicks));
-        var newTicks = ticks
-          .enter()
-          .append("transform")
-          .attr("class", axisName("Tick", axisIndex));
-        newTicks
-          .append("shape")
-          .call(makeSolid)
-          .append("box")
-          .attr("size", tickSize + " " + tickSize + " " + tickSize);
-        // enter + update
-        ticks
-          .transition()
-          .duration(duration)
-          .attr("translation", function (tick) {
-            return constVecWithAxisValue(0, scale(tick), axisIndex);
-          });
-        ticks.exit().remove();
+         if(any(names(arguments) == "tickNumbers")){
+          if(eval(arguments$tickNumbers) == T){
+            tmp <- paste0(tmp, '
+            // ticks along each axis
+            var ticks = scene
+              .selectAll("." + axisName("Tick", 0))
+              .data(xScale.ticks(numTicks));
+            var newTicks = ticks
+              .enter()
+              .append("transform")
+              .attr("class", axisName("Tick", 0));
+            newTicks
+              .append("shape")
+              .call(makeSolid)
+              .append("box")
+              .attr("size", tickSize + " " + tickSize + " " + tickSize);
+            // enter + update
+            ticks
+              .transition()
+              .duration(duration)
+              .attr("translation", function (tick) {
+                return constVecWithAxisValue(0, xScale(tick), 0);
+              });
+            ticks.exit().remove();
 
-        // tick labels
-        // var tickLabels = ticks
-        //   .selectAll("billboard shape text")
-        //   .data(function (d) {
-        //     return [d];
-        //   });
-        // var newTickLabels = tickLabels
-        //   .enter()
-        //   .append("billboard")
-        //   .attr("axisOfRotation", "0 0 0")
-        //   .append("shape")
-        //   .call(makeSolid);
-        // newTickLabels
-        //   .append("text")
-        //   .attr("string", scale.tickFormat(10))
-        //   .attr("solid", "true")
-        //   .append("fontstyle")
-        //   .attr("size", tickFontSize)
-        //   .attr("family", "Helvetica")
-        //   .attr("shape-rendering", "crispEdges")
-        //   .attr("justify", "END MIDDLE");
-        // // tickLabels // enter + update
-        // //   .attr("string", scale.tickFormat(10));
-        // // tickLabels.exit().remove();
+            // tick labels
+            var tickLabels = ticks
+              .selectAll("billboard shape text")
+              .data(function (d) {
+                return [d];
+              });
+            var newTickLabels = tickLabels
+              .enter()
+              .append("billboard")
+              .attr("axisOfRotation", "0 0 0")
+              .append("shape")
+              .call(makeSolid);
+            newTickLabels
+              .append("text")
+              .attr("string", xScale.tickFormat(10))
+              .attr("solid", "true")
+              .append("fontstyle")
+              .attr("size", tickFontSize)
+              .attr("family", "Helvetica")
+              .attr("shape-rendering", "crispEdges")
+              .attr("justify", "END MIDDLE");
+            // tickLabels // enter + update
+            //   .attr("string", scale.tickFormat(10));
+            // tickLabels.exit().remove();
+
+            // ticks along each axis
+            var ticks = scene
+              .selectAll("." + axisName("Tick", 1))
+              .data(yScale.ticks(numTicks));
+            var newTicks = ticks
+              .enter()
+              .append("transform")
+              .attr("class", axisName("Tick", 1));
+            newTicks
+              .append("shape")
+              .call(makeSolid)
+              .append("box")
+              .attr("size", tickSize + " " + tickSize + " " + tickSize);
+            // enter + update
+            ticks
+              .transition()
+              .duration(duration)
+              .attr("translation", function (tick) {
+                return constVecWithAxisValue(0, yScale(tick), 1);
+              });
+            ticks.exit().remove();
+
+            // tick labels
+            var tickLabels = ticks
+              .selectAll("billboard shape text")
+              .data(function (d) {
+                return [d];
+              });
+            var newTickLabels = tickLabels
+              .enter()
+              .append("billboard")
+              .attr("axisOfRotation", "0 0 0")
+              .append("shape")
+              .call(makeSolid);
+            newTickLabels
+              .append("text")
+              .attr("string", yScale.tickFormat(10))
+              .attr("solid", "true")
+              .append("fontstyle")
+              .attr("size", tickFontSize)
+              .attr("family", "Helvetica")
+              .attr("shape-rendering", "crispEdges")
+              .attr("justify", "END MIDDLE");
+            // tickLabels // enter + update
+            //   .attr("string", scale.tickFormat(10));
+            // tickLabels.exit().remove();
+
+            // ticks along each axis
+            var ticks = scene
+              .selectAll("." + axisName("Tick", 2))
+              .data(zScale.ticks(numTicks));
+            var newTicks = ticks
+              .enter()
+              .append("transform")
+              .attr("class", axisName("Tick", 2));
+            newTicks
+              .append("shape")
+              .call(makeSolid)
+              .append("box")
+              .attr("size", tickSize + " " + tickSize + " " + tickSize);
+            // enter + update
+            ticks
+              .transition()
+              .duration(duration)
+              .attr("translation", function (tick) {
+                return constVecWithAxisValue(0, zScale(tick), 2);
+              });
+            ticks.exit().remove();
+
+            // tick labels
+            var tickLabels = ticks
+              .selectAll("billboard shape text")
+              .data(function (d) {
+                return [d];
+              });
+            var newTickLabels = tickLabels
+              .enter()
+              .append("billboard")
+              .attr("axisOfRotation", "0 0 0")
+              .append("shape")
+              .call(makeSolid);
+            newTickLabels
+              .append("text")
+              .attr("string", zScale.tickFormat(10))
+              .attr("solid", "true")
+              .append("fontstyle")
+              .attr("size", tickFontSize)
+              .attr("family", "Helvetica")
+              .attr("shape-rendering", "crispEdges")
+              .attr("justify", "END MIDDLE");
+            // tickLabels // enter + update
+            //   .attr("string", scale.tickFormat(10));
+            // tickLabels.exit().remove();
+            ')
+        } else
+          tmp <- paste0(tmp, '
+          // ticks along each axis
+          var ticks = scene
+            .selectAll("." + axisName("Tick", axisIndex))
+            .data(scale.ticks(numTicks));
+          var newTicks = ticks
+            .enter()
+            .append("transform")
+            .attr("class", axisName("Tick", axisIndex));
+          newTicks
+            .append("shape")
+            .call(makeSolid)
+            .append("box")
+            .attr("size", tickSize + " " + tickSize + " " + tickSize);
+          // enter + update
+          ticks
+            .transition()
+            .duration(duration)
+            .attr("translation", function (tick) {
+              return constVecWithAxisValue(0, scale(tick), axisIndex);
+            });
+          ticks.exit().remove();
+        ')} else
+          tmp <- paste0(tmp, '
+          // ticks along each axis
+          var ticks = scene
+            .selectAll("." + axisName("Tick", axisIndex))
+            .data(scale.ticks(numTicks));
+          var newTicks = ticks
+            .enter()
+            .append("transform")
+            .attr("class", axisName("Tick", axisIndex));
+          newTicks
+            .append("shape")
+            .call(makeSolid)
+            .append("box")
+            .attr("size", tickSize + " " + tickSize + " " + tickSize);
+          // enter + update
+          ticks
+            .transition()
+            .duration(duration)
+            .attr("translation", function (tick) {
+              return constVecWithAxisValue(0, scale(tick), axisIndex);
+            });
+          ticks.exit().remove();
+        ')
+        tmp <- paste0(tmp,'
+        
+
+        
 
         // base grid lines
         if (axisIndex == 0 || axisIndex == 2) {
