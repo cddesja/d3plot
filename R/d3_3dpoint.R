@@ -444,25 +444,32 @@ d3_3dpoint <- function(data, ...){
           var gridLines = scene
             .selectAll("." + axisName("GridLine", axisIndex))
             .data(scale.ticks(numTicks));
-          gridLines.exit().remove();
+          gridLines.exit().remove();')
 
-        // adds the gridlines for two axes 
-        // should match up with the stems.
-        var newGridLines = gridLines
-            .enter()
-            .append("transform")
-            .attr("class", axisName("GridLine", axisIndex))
-            .attr(
-              "rotation",
-              axisIndex == 0 ? [0, 1, 0, -Math.PI / 2] : [0, 0, 0, 0]
-            )
-            .append("shape");
+        if(any(names(arguments) == "gridLines")){
+          if(eval(arguments$gridLines) == T){
+            tmp <- paste0(tmp, '
+            // adds the gridlines for two axes 
+            // should match up with the stems.
+            var newGridLines = gridLines
+              .enter()
+              .append("transform")
+              .attr("class", axisName("GridLine", axisIndex))
+              .attr(
+                "rotation",
+                axisIndex == 0 ? [0, 1, 0, -Math.PI / 2] : [0, 0, 0, 0]
+              )
+              .append("shape");
 
-          newGridLines
-            .append("appearance")
-            .append("material")
-            .attr("emissiveColor", "red");
-          newGridLines.append("polyline2d");
+            newGridLines
+              .append("appearance")
+              .append("material")
+              .attr("emissiveColor", "#ededed");
+            newGridLines.append("polyline2d");
+            ')
+          }
+        }
+        tmp <- paste0(tmp,'
 
           gridLines
             .selectAll("shape polyline2d")
