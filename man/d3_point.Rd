@@ -32,6 +32,8 @@ d3_point(data, ...)
 \item{gridColor}{(optional) Affects the color of the gridlines, specify css color}
 
 \item{gridOpacity}{(optional) Affects the opacity of the gridlines, 0-1 scale}
+
+\item{browser}{(mandatory/optional) If code editor has viewer browser is optional if not browser opens visual in a browser window}
 }
 \description{
 \code{d3_point} creates a D3 scatter plot. It takes data either directly or passed to it from \code{\link{d3plot}} function.
@@ -42,6 +44,8 @@ d3_point(data, ...)
 d3_point(d3plot(x = mpg, y = cyl, color = cyl, id = rownames(mtcars), data = mtcars))
 # Better
 d3plot(x = Sepal.Length, y = Petal.Length, color = Species, data = iris) \%>\% d3_point(radius = 5)
+# With more arguments
+ d3_point(d3plot(x = mpg, y = cyl, color = cyl, id = rownames(mtcars), data = mtcars ),radius = 15,opacity = .25,stroke = "black",strokeMatch = 1,yTitle = "Im confused by effect vs affect", Title = "MTCars", xTitle = "MPG",gridColor = "#30c5FF",yGrid = T,xGrid = T, gridOpacity = 1, browser = T)
 }
 }
 \seealso{

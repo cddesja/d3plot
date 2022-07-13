@@ -446,6 +446,24 @@ d3_3dpoint <- function(data, ...){
             .data(scale.ticks(numTicks));
           gridLines.exit().remove();
 
+        // adds the gridlines for two axes 
+        // should match up with the stems.
+        var newGridLines = gridLines
+            .enter()
+            .append("transform")
+            .attr("class", axisName("GridLine", axisIndex))
+            .attr(
+              "rotation",
+              axisIndex == 0 ? [0, 1, 0, -Math.PI / 2] : [0, 0, 0, 0]
+            )
+            .append("shape");
+
+          newGridLines
+            .append("appearance")
+            .append("material")
+            .attr("emissiveColor", "red");
+          newGridLines.append("polyline2d");
+
           gridLines
             .selectAll("shape polyline2d")
             .transition()

@@ -2,12 +2,59 @@
 % Please edit documentation in R/d3_3dpoint.R
 \name{d3_3dpoint}
 \alias{d3_3dpoint}
-\title{3d demo https://gist.github.com/hlvoorhees/5986172}
+\title{3d demo https://gist.github.com/hlvoorhees/5986172
+\code {d3_3dpoint} creates a 3d scatter plot.}
 \usage{
 d3_3dpoint(data, ...)
 }
+\arguments{
+\item{data}{data in JSON format, created by d3plot() or from another source}
+
+\item{radius}{(optional) Affects the size of the dots, numerical scale}
+
+\item{orient}{(optional) Affects the starting orientation of the graph, pass in a string with any combination of two axis "Xy"}
+
+\item{xLabel}{(optional) Changes the label of the x axis from "x" to specified string}
+
+\item{yLabel}{(optional) Changes the label of the y axis from "y" to specified string}
+
+\item{zLabel}{(optional) Changes the label of the x axis from "x" to specified string}
+
+\item{dataMargin}{(optional) Affects the margin of domain around the data, numerical percentage 0-100}
+
+\item{xMin}{(optional) Changes the start of the x axis domain to the specified number, numerical}
+
+\item{xMax}{(optional) Changes the end of the x axis domain to the specified number, numerical}
+
+\item{yMin}{(optional) Changes the start of the y axis domain to the specified number, numerical}
+
+\item{yMax}{(optional) Changes the end of the y axis domain to the specified number, numerical}
+
+\item{zMin}{(optional) Changes the start of the z axis domain to the specified number, numerical}
+
+\item{zMax}{(optional) Changes the end of the z axis domain to the specified number, numerical}
+
+\item{labelFontSize}{(optional) Affects the size of the axis labels, numerical best between 5-20}
+
+\item{numTicks}{(optional) Affects the number of ticks, numerical}
+
+\item{tickSize}{(optional) Affects the size of axis ticks, numerical}
+
+\item{opacity}{(optional) Affects the opacity of the dots, 0-1 scale}
+
+\item{labelColor}{(optional) Affects the color of the axis labels and ticks, string css colors}
+
+\item{axisColor}{(optional) Affects the color of the axis, string css colors}
+
+\item{stems}{(optional) Adds stems that connect to each point, boolean}
+
+\item{stemsOpacity}{(optional) Affects the opacirt of the stems, 0-1 scale}
+
+\item{browser}{(mandatory/optional) If code editor has viewer browser is optional if not browser opens visual in a browser window}
+}
 \description{
 3d demo https://gist.github.com/hlvoorhees/5986172
+\code {d3_3dpoint} creates a 3d scatter plot.
 }
 \examples{
 {
