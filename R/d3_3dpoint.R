@@ -563,7 +563,8 @@ d3_3dpoint <- function(data, ...){
           .append("material")')
           if(any(names(arguments) == "stems")){
             if(eval(arguments$stems) == T){
-              tmp <- paste0(tmp, '.attr("emissiveColor", function (rows) { return cirColor(rows.color);})')}
+              tmp <- paste0(tmp, '.attr("emissiveColor", function (rows) { return cirColor(rows.color);})')
+              } else tmp <- paste0(tmp,'.attr("emissiveColor", none)')
           } else tmp <- paste0(tmp,'.attr("emissiveColor", none)')
           tmp <- paste0(tmp, '')
           if(any(names(arguments) == "stemsOpacity")){
