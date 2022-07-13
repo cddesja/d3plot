@@ -4,14 +4,24 @@
 #' @param data data in JSON format, created by d3plot() or from another source
 #' @param radius (optional) Affects the size of the dots, numerical scale
 #' @param orient (optional) Affects the starting orientation of the graph, pass in a string with any combination of two axis "Xy"
-#' @param xTitle (optional) Changes the label of the x axis from "x" to specified string
-#' @param yTitle (optional) Changes the label of the y axis from "y" to specified string
-#' @param zTitle (optional) Changes the label of the z axis from "z" to specified string
-#' @param labelFontSize (optional) Affects the size of the axis labels, best between 5-20
-#' @param tickSize (optional) Affects the size of axis ticks
+#' @param xLabel (optional) Changes the label of the x axis from "x" to specified string
+#' @param yLabel (optional) Changes the label of the y axis from "y" to specified string
+#' @param zLabel (optional) Changes the label of the x axis from "x" to specified string
+#' @param dataMargin (optional) Affects the margin of domain around the data, numerical percentage 0-100
+#' @param xMin (optional) Changes the start of the x axis domain to the specified number, numerical
+#' @param xMax (optional) Changes the end of the x axis domain to the specified number, numerical
+#' @param yMin (optional) Changes the start of the y axis domain to the specified number, numerical
+#' @param yMax (optional) Changes the end of the y axis domain to the specified number, numerical
+#' @param zMin (optional) Changes the start of the z axis domain to the specified number, numerical
+#' @param zMax (optional) Changes the end of the z axis domain to the specified number, numerical
+#' @param labelFontSize (optional) Affects the size of the axis labels, numerical best between 5-20
+#' @param numTicks (optional) Affects the number of ticks, numerical
+#' @param tickSize (optional) Affects the size of axis ticks, numerical
 #' @param opacity (optional) Affects the opacity of the dots, 0-1 scale
 #' @param labelColor (optional) Affects the color of the axis labels and ticks, string css colors
 #' @param axisColor (optional) Affects the color of the axis, string css colors
+#' @param stems (optional) Adds stems that connect to each point, boolean
+#' @param stemsOpacity (optional) Affects the opacirt of the stems, 0-1 scale
 #' @param browser (mandatory/optional) If code editor has viewer browser is optional if not browser opens visual in a browser window
 #'@examples{
 #'\dontrun[
@@ -124,20 +134,20 @@ d3_3dpoint <- function(data, ...){
       var ease = "linear";
       var time = 0;
       var axisKeys = ["x", "y", "z"];')
-        if(any(names(arguments) == "xTitle")& any(names(arguments) == "yTitle") & any(names(arguments) == "zTitle")){
-          tmp <- paste0(tmp, 'var axisNameKey = ["', eval(arguments$xTitle), '","',eval(arguments$yTitle),'","',eval(arguments$zTitle),'"];')
-        } else if(any(names(arguments) == "xTitle")& any(names(arguments) == "yTitle")){
-          tmp <- paste0(tmp, 'var axisNameKey = ["', eval(arguments$xTitle), '","',eval(arguments$yTitle),'","z"];')
-        } else if(any(names(arguments) == "xTitle")&  any(names(arguments) == "zTitle")){
-          tmp <- paste0(tmp, 'var axisNameKey = ["', eval(arguments$xTitle), '","y","',eval(arguments$zTitle),'"];')
-        } else if(any(names(arguments) == "yTitle") & any(names(arguments) == "zTitle")){
-          tmp <- paste0(tmp, 'var axisNameKey = ["x","',eval(arguments$yTitle),'","',eval(arguments$zTitle),'"];')
-        }else if(any(names(arguments) == "xTitle")){
-          tmp <- paste0(tmp, 'var axisNameKey = ["',eval(arguments$xTitle),'","y","z"];')
-        }else if(any(names(arguments) == "yTitle")){
-          tmp <- paste0(tmp, 'var axisNameKey = ["x","',eval(arguments$yTitle),'","z"];')
-        }else if(any(names(arguments) == "zTitle")){
-          tmp <- paste0(tmp, 'var axisNameKey = ["x","y","',eval(arguments$zTitle),'"];')
+        if(any(names(arguments) == "xLabel")& any(names(arguments) == "yLabel") & any(names(arguments) == "zLabel")){
+          tmp <- paste0(tmp, 'var axisNameKey = ["', eval(arguments$xLabel), '","',eval(arguments$yLabel),'","',eval(arguments$zLabel),'"];')
+        } else if(any(names(arguments) == "xLabel")& any(names(arguments) == "yLabel")){
+          tmp <- paste0(tmp, 'var axisNameKey = ["', eval(arguments$xLabel), '","',eval(arguments$yLabel),'","z"];')
+        } else if(any(names(arguments) == "xLabel")&  any(names(arguments) == "zLabel")){
+          tmp <- paste0(tmp, 'var axisNameKey = ["', eval(arguments$xLabel), '","y","',eval(arguments$zLabel),'"];')
+        } else if(any(names(arguments) == "yLabel") & any(names(arguments) == "zLabel")){
+          tmp <- paste0(tmp, 'var axisNameKey = ["x","',eval(arguments$yLabel),'","',eval(arguments$zLabel),'"];')
+        }else if(any(names(arguments) == "xLabel")){
+          tmp <- paste0(tmp, 'var axisNameKey = ["',eval(arguments$xLabel),'","y","z"];')
+        }else if(any(names(arguments) == "yLabel")){
+          tmp <- paste0(tmp, 'var axisNameKey = ["x","',eval(arguments$yLabel),'","z"];')
+        }else if(any(names(arguments) == "zLabel")){
+          tmp <- paste0(tmp, 'var axisNameKey = ["x","y","',eval(arguments$zLabel),'"];')
         }else
           tmp <- paste0(tmp, 'var axisNameKey = ["x", "y", "z"];')
         tmp <- paste0(tmp,'
@@ -253,36 +263,133 @@ d3_3dpoint <- function(data, ...){
       var cirColor = d3.scale.category10();
 
       function drawAxis(axisIndex, key, duration) {
+        ')
+        if(any(names(arguments) == "dataMargin")){
+          tmp <- paste0(tmp, 'var dataMargin = ', eval(arguments$dataMargin)/100, ';')
+        } else
+          tmp <- paste0(tmp, 'var dataMargin = 0;')
+        tmp <- paste0(tmp,'
+        var xBuff =
+          (d3.max(rows, (d) => d.x) - d3.min(rows, (d) => d.x)) * dataMargin;
+        var yBuff =
+          (d3.max(rows, (d) => d.y) - d3.min(rows, (d) => d.y)) * dataMargin;
+        var zBuff =
+          (d3.max(rows, (d) => d.z) - d3.min(rows, (d) => d.z)) * dataMargin;
+      
         var scale = d3.scale
           .linear()
           .domain([1, 10]) // sets the axis tick labels
-          .range(axisRange); // range refers to length in px of axis
-
-        var xScale = d3.scale
-          .linear()
-          .domain([4, 8]) // demo data range
-          .range(axisRange); // range refers to length in px of axis
-
-        var yScale = d3.scale
-          .linear()
-          .domain([2, 4.5]) // demo data range
-          .range(axisRange); // range refers to length in px of axis
-
-        var zScale = d3.scale
-          .linear()
-          .domain([1, 7]) // demo data range
-          .range(axisRange); // range refers to length in px of axis
+          .range(axisRange); // range refers to length in px of axis')
+        
+        if(any(names(arguments) == "xMin")& any(names(arguments) == "xMax")){
+          tmp <- paste0(tmp, '
+            var xScale = d3.scale
+              .linear()
+              .domain([', eval(arguments$xMin), ',',eval(arguments$xMax),'])
+              .range(axisRange); // range refers to length in px of axis')
+        } else if(any(names(arguments) == "xMin")){
+          tmp <- paste0(tmp, '
+            var xScale = d3.scale
+              .linear()
+              .domain([', eval(arguments$xMin), ',d3.max(rows, (d) => d.x) + xBuff])
+              .range(axisRange); // range refers to length in px of axis')
+        } else if(any(names(arguments) == "xMax")){
+          tmp <- paste0(tmp, '
+            var xScale = d3.scale
+              .linear()
+              .domain([d3.min(rows, (d) => d.x) - xBuff,', eval(arguments$xMax), '])
+              .range(axisRange); // range refers to length in px of axis')
+        } else {
+          tmp <- paste0(tmp, '
+            var xScale = d3.scale
+              .linear()
+              .domain([
+                d3.min(rows, (d) => d.x) - xBuff,
+                d3.max(rows, (d) => d.x) + xBuff,
+              ]) // demo data range
+              .range(axisRange); // range refers to length in px of axis             
+          ')
+        }
+        tmp <- paste0(tmp,'')
+        
+        if(any(names(arguments) == "yMin")& any(names(arguments) == "yMax")){
+          tmp <- paste0(tmp, '
+            var yScale = d3.scale
+              .linear()
+              .domain([', eval(arguments$yMin), ',',eval(arguments$yMax),'])
+              .range(axisRange); // range refers to length in px of axis')
+        } else if(any(names(arguments) == "yMin")){
+          tmp <- paste0(tmp, '
+            var yScale = d3.scale
+              .linear()
+              .domain([', eval(arguments$yMin), ',d3.max(rows, (d) => d.y) + yBuff])
+              .range(axisRange); // range refers to length in px of axis')
+        } else if(any(names(arguments) == "yMax")){
+          tmp <- paste0(tmp, '
+            var yScale = d3.scale
+              .linear()
+              .domain([d3.min(rows, (d) => d.y) - yBuff,', eval(arguments$yMax), '])
+              .range(axisRange); // range refers to length in px of axis')
+        } else {
+          tmp <- paste0(tmp, '
+            var yScale = d3.scale
+              .linear()
+              .domain([
+                d3.min(rows, (d) => d.y) - yBuff,
+                d3.max(rows, (d) => d.y) + yBuff,
+              ]) // demo data range
+              .range(axisRange); // range refers to length in px of axis             
+          ')
+        }
+        tmp <- paste0(tmp,'')
+        
+        if(any(names(arguments) == "zMin")& any(names(arguments) == "zMax")){
+          tmp <- paste0(tmp, '
+            var zScale = d3.scale
+              .linear()
+              .domain([', eval(arguments$zMin), ',',eval(arguments$zMax),'])
+              .range(axisRange); // range refers to length in px of axis')
+        } else if(any(names(arguments) == "zMin")){
+          tmp <- paste0(tmp, '
+            var zScale = d3.scale
+              .linear()
+              .domain([', eval(arguments$zMin), ',d3.max(rows, (d) => d.z) + zBuff])
+              .range(axisRange); // range refers to length in px of axis')
+        } else if(any(names(arguments) == "zMax")){
+          tmp <- paste0(tmp, '
+            var zScale = d3.scale
+              .linear()
+              .domain([d3.min(rows, (d) => d.z) - zBuff,', eval(arguments$zMax), '])
+              .range(axisRange); // range refers to length in px of axis')
+        } else {
+          tmp <- paste0(tmp, '
+            var zScale = d3.scale
+              .linear()
+              .domain([
+                d3.min(rows, (d) => d.z) - zBuff,
+                d3.max(rows, (d) => d.z) + zBuff,
+              ]) // demo data range
+              .range(axisRange); // range refers to length in px of axis             
+          ')
+        }
+        tmp <- paste0(tmp,'
 
         scales[0] = xScale;
         scales[1] = yScale;
-        scales[2] = zScale;
-
-        var numTicks = 5;')
+        scales[2] = zScale;')
+        
+        if(any(names(arguments) == "numTicks")){
+          tmp <- paste0(tmp, 'var numTicks = ', eval(arguments$numTicks), ';')
+        } else
+          tmp <- paste0(tmp, 'var numTicks = 5;')
+        tmp <- paste0(tmp,'')
+        
         if(any(names(arguments) == "tickSize")){
           tmp <- paste0(tmp, 'var tickSize = ', eval(arguments$tickSize)/100, ';')
         } else
           tmp <- paste0(tmp, 'var tickSize = 0.1;')
         tmp <- paste0(tmp,'
+        
         var tickFontSize = 0.5;
 
         // ticks along each axis
@@ -435,8 +542,17 @@ d3_3dpoint <- function(data, ...){
           .append("shape");
         newStems
           .append("appearance")
-          .append("material")
-          .attr("emissiveColor", none);
+          .append("material")')
+          if(any(names(arguments) == "stems")){
+            if(eval(arguments$stems) == T){
+              tmp <- paste0(tmp, '.attr("emissiveColor", function (rows) { return cirColor(rows.color);})')}
+          } else tmp <- paste0(tmp,'.attr("emissiveColor", none)')
+          tmp <- paste0(tmp, '')
+          if(any(names(arguments) == "stemsOpacity")){
+            tmp <- paste0(tmp, '.attr("transparency",1-', eval(arguments$stemsOpacity), ')')
+          } 
+          tmp <- paste0(tmp,';
+  
         newStems.append("polyline2d").attr("lineSegments", function (row) {
           return "0 1, 0 0";
         });
