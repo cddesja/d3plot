@@ -43,7 +43,7 @@ d3_3dpoint <- function(data, ...){
     <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
     <script
       type="text/javascript"
-      src="http://x3dom.org/x3dom/dist/x3dom-full.js"
+      src="https://cddesja.github.io/js/x3dom-full.js"
     ></script>
     <style>
       body {
