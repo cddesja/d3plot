@@ -130,7 +130,7 @@ d3_3dpoint <- function(data, ...){
       var axisRange = [0, 12];
       var scales = [];
       var initialDuration = 0;
-      var defaultDuration = 800;
+      var defaultDuration = 0;
       var ease = "linear";
       var time = 0;
       var axisKeys = ["x", "y", "z"];')
