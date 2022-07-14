@@ -390,8 +390,14 @@ d3_3dpoint <- function(data, ...){
           tmp <- paste0(tmp, 'var tickSize = 0.1;')
         tmp <- paste0(tmp,'
         
-        var tickFontSize = 0.5;')
-
+        ')
+        if(any(names(arguments) == "tickFontSize")){
+          tmp <- paste0(tmp, 'var tickFontSize = ', eval(arguments$tickFontSize)/10, ';')
+        } else
+          tmp <- paste0(tmp, 'var tickFontSize = 0.5;')
+        tmp <- paste0(tmp,'
+        
+        ')
          if(any(names(arguments) == "tickNumbers")){
           if(eval(arguments$tickNumbers) == T){
             tmp <- paste0(tmp, '
