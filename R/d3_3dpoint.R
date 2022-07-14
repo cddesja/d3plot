@@ -17,11 +17,14 @@
 #' @param labelFontSize (optional) Affects the size of the axis labels, numerical best between 5-20
 #' @param numTicks (optional) Affects the number of ticks, numerical
 #' @param tickSize (optional) Affects the size of axis ticks, numerical
+#' @param tickNumbers (optional) Adds numbers of to tick marks, boolean
+#' @param tickFontSize (optional) Affects the size of the tickNumbers, numerical best between 5-20
 #' @param opacity (optional) Affects the opacity of the dots, 0-1 scale
 #' @param labelColor (optional) Affects the color of the axis labels and ticks, string css colors
 #' @param axisColor (optional) Affects the color of the axis, string css colors
 #' @param stems (optional) Adds stems that connect to each point, boolean
 #' @param stemsOpacity (optional) Affects the opacirt of the stems, 0-1 scale
+#' @param gridlines (optional) Adds gridLines to the zx axis
 #' @param browser (mandatory/optional) If code editor has viewer browser is optional if not browser opens visual in a browser window
 #'@examples{
 #'\dontrun[
