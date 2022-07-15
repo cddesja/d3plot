@@ -50,8 +50,12 @@ d3_3dpoint <- function(data, ...){
     ></script>
     <style>
       body {
-        margin: auto;
-        background-color: white;
+        margin: auto;')
+        if(any(names(arguments) == "backgroundColor")){
+          tmp <- paste0(tmp, 'background-color: ', eval(arguments$backgroundColor), ';')
+        } else
+          tmp <- paste0(tmp, 'background-color: white;')
+        tmp <- paste0(tmp,'
       }
       div {
         backgroumd-color: white;
