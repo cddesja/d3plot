@@ -17,11 +17,14 @@
 #' @param labelFontSize (optional) Affects the size of the axis labels, numerical best between 5-20
 #' @param numTicks (optional) Affects the number of ticks, numerical
 #' @param tickSize (optional) Affects the size of axis ticks, numerical
+#' @param tickNumbers (optional) Adds numbers of to tick marks, boolean
+#' @param tickFontSize (optional) Affects the size of the tickNumbers, numerical best between 5-20
 #' @param opacity (optional) Affects the opacity of the dots, 0-1 scale
 #' @param labelColor (optional) Affects the color of the axis labels and ticks, string css colors
 #' @param axisColor (optional) Affects the color of the axis, string css colors
 #' @param stems (optional) Adds stems that connect to each point, boolean
 #' @param stemsOpacity (optional) Affects the opacirt of the stems, 0-1 scale
+#' @param gridlines (optional) Adds gridLines to the zx axis
 #' @param browser (mandatory/optional) If code editor has viewer browser is optional if not browser opens visual in a browser window
 #'@examples{
 #'\dontrun[
@@ -47,8 +50,12 @@ d3_3dpoint <- function(data, ...){
     ></script>
     <style>
       body {
-        margin: auto;
-        background-color: white;
+        margin: auto;')
+        if(any(names(arguments) == "backgroundColor")){
+          tmp <- paste0(tmp, 'background-color: ', eval(arguments$backgroundColor), ';')
+        } else
+          tmp <- paste0(tmp, 'background-color: white;')
+        tmp <- paste0(tmp,'
       }
       div {
         backgroumd-color: white;
@@ -130,7 +137,7 @@ d3_3dpoint <- function(data, ...){
       var axisRange = [0, 12];
       var scales = [];
       var initialDuration = 0;
-      var defaultDuration = 800;
+      var defaultDuration = 0;
       var ease = "linear";
       var time = 0;
       var axisKeys = ["x", "y", "z"];')
@@ -390,79 +397,241 @@ d3_3dpoint <- function(data, ...){
           tmp <- paste0(tmp, 'var tickSize = 0.1;')
         tmp <- paste0(tmp,'
         
-        var tickFontSize = 0.5;
+        ')
+        if(any(names(arguments) == "tickFontSize")){
+          tmp <- paste0(tmp, 'var tickFontSize = ', eval(arguments$tickFontSize)/10, ';')
+        } else
+          tmp <- paste0(tmp, 'var tickFontSize = 0.5;')
+        tmp <- paste0(tmp,'
+        
+        ')
+         if(any(names(arguments) == "tickNumbers")){
+          if(eval(arguments$tickNumbers) == T){
+            tmp <- paste0(tmp, '
+            // ticks along each axis
+            var ticks = scene
+              .selectAll("." + axisName("Tick", 0))
+              .data(xScale.ticks(numTicks));
+            var newTicks = ticks
+              .enter()
+              .append("transform")
+              .attr("class", axisName("Tick", 0));
+            newTicks
+              .append("shape")
+              .call(makeSolid)
+              .append("box")
+              .attr("size", tickSize + " " + tickSize + " " + tickSize);
+            // enter + update
+            ticks
+              .transition()
+              .duration(duration)
+              .attr("translation", function (tick) {
+                return constVecWithAxisValue(0, xScale(tick), 0);
+              });
+            ticks.exit().remove();
 
-        // ticks along each axis
-        var ticks = scene
-          .selectAll("." + axisName("Tick", axisIndex))
-          .data(scale.ticks(numTicks));
-        var newTicks = ticks
-          .enter()
-          .append("transform")
-          .attr("class", axisName("Tick", axisIndex));
-        newTicks
-          .append("shape")
-          .call(makeSolid)
-          .append("box")
-          .attr("size", tickSize + " " + tickSize + " " + tickSize);
-        // enter + update
-        ticks
-          .transition()
-          .duration(duration)
-          .attr("translation", function (tick) {
-            return constVecWithAxisValue(0, scale(tick), axisIndex);
-          });
-        ticks.exit().remove();
+            // tick labels
+            var tickLabels = ticks
+              .selectAll("billboard shape text")
+              .data(function (d) {
+                return [d];
+              });
+            var newTickLabels = tickLabels
+              .enter()
+              .append("billboard")
+              .attr("axisOfRotation", "0 0 0")
+              .append("shape")
+              .call(makeSolid);
+            newTickLabels
+              .append("text")
+              .attr("string", xScale.tickFormat(10))
+              .attr("solid", "true")
+              .append("fontstyle")
+              .attr("size", tickFontSize)
+              .attr("family", "Helvetica")
+              .attr("shape-rendering", "crispEdges")
+              .attr("justify", "END MIDDLE");
+            // tickLabels // enter + update
+            //   .attr("string", scale.tickFormat(10));
+            // tickLabels.exit().remove();
 
-        // tick labels
-        // var tickLabels = ticks
-        //   .selectAll("billboard shape text")
-        //   .data(function (d) {
-        //     return [d];
-        //   });
-        // var newTickLabels = tickLabels
-        //   .enter()
-        //   .append("billboard")
-        //   .attr("axisOfRotation", "0 0 0")
-        //   .append("shape")
-        //   .call(makeSolid);
-        // newTickLabels
-        //   .append("text")
-        //   .attr("string", scale.tickFormat(10))
-        //   .attr("solid", "true")
-        //   .append("fontstyle")
-        //   .attr("size", tickFontSize)
-        //   .attr("family", "Helvetica")
-        //   .attr("shape-rendering", "crispEdges")
-        //   .attr("justify", "END MIDDLE");
-        // // tickLabels // enter + update
-        // //   .attr("string", scale.tickFormat(10));
-        // // tickLabels.exit().remove();
+            // ticks along each axis
+            var ticks = scene
+              .selectAll("." + axisName("Tick", 1))
+              .data(yScale.ticks(numTicks));
+            var newTicks = ticks
+              .enter()
+              .append("transform")
+              .attr("class", axisName("Tick", 1));
+            newTicks
+              .append("shape")
+              .call(makeSolid)
+              .append("box")
+              .attr("size", tickSize + " " + tickSize + " " + tickSize);
+            // enter + update
+            ticks
+              .transition()
+              .duration(duration)
+              .attr("translation", function (tick) {
+                return constVecWithAxisValue(0, yScale(tick), 1);
+              });
+            ticks.exit().remove();
+
+            // tick labels
+            var tickLabels = ticks
+              .selectAll("billboard shape text")
+              .data(function (d) {
+                return [d];
+              });
+            var newTickLabels = tickLabels
+              .enter()
+              .append("billboard")
+              .attr("axisOfRotation", "0 0 0")
+              .append("shape")
+              .call(makeSolid);
+            newTickLabels
+              .append("text")
+              .attr("string", yScale.tickFormat(10))
+              .attr("solid", "true")
+              .append("fontstyle")
+              .attr("size", tickFontSize)
+              .attr("family", "Helvetica")
+              .attr("shape-rendering", "crispEdges")
+              .attr("justify", "END MIDDLE");
+            // tickLabels // enter + update
+            //   .attr("string", scale.tickFormat(10));
+            // tickLabels.exit().remove();
+
+            // ticks along each axis
+            var ticks = scene
+              .selectAll("." + axisName("Tick", 2))
+              .data(zScale.ticks(numTicks));
+            var newTicks = ticks
+              .enter()
+              .append("transform")
+              .attr("class", axisName("Tick", 2));
+            newTicks
+              .append("shape")
+              .call(makeSolid)
+              .append("box")
+              .attr("size", tickSize + " " + tickSize + " " + tickSize);
+            // enter + update
+            ticks
+              .transition()
+              .duration(duration)
+              .attr("translation", function (tick) {
+                return constVecWithAxisValue(0, zScale(tick), 2);
+              });
+            ticks.exit().remove();
+
+            // tick labels
+            var tickLabels = ticks
+              .selectAll("billboard shape text")
+              .data(function (d) {
+                return [d];
+              });
+            var newTickLabels = tickLabels
+              .enter()
+              .append("billboard")
+              .attr("axisOfRotation", "0 0 0")
+              .append("shape")
+              .call(makeSolid);
+            newTickLabels
+              .append("text")
+              .attr("string", zScale.tickFormat(10))
+              .attr("solid", "true")
+              .append("fontstyle")
+              .attr("size", tickFontSize)
+              .attr("family", "Helvetica")
+              .attr("shape-rendering", "crispEdges")
+              .attr("justify", "END MIDDLE");
+            // tickLabels // enter + update
+            //   .attr("string", scale.tickFormat(10));
+            // tickLabels.exit().remove();
+            ')
+        } else
+          tmp <- paste0(tmp, '
+          // ticks along each axis
+          var ticks = scene
+            .selectAll("." + axisName("Tick", axisIndex))
+            .data(scale.ticks(numTicks));
+          var newTicks = ticks
+            .enter()
+            .append("transform")
+            .attr("class", axisName("Tick", axisIndex));
+          newTicks
+            .append("shape")
+            .call(makeSolid)
+            .append("box")
+            .attr("size", tickSize + " " + tickSize + " " + tickSize);
+          // enter + update
+          ticks
+            .transition()
+            .duration(duration)
+            .attr("translation", function (tick) {
+              return constVecWithAxisValue(0, scale(tick), axisIndex);
+            });
+          ticks.exit().remove();
+        ')} else
+          tmp <- paste0(tmp, '
+          // ticks along each axis
+          var ticks = scene
+            .selectAll("." + axisName("Tick", axisIndex))
+            .data(scale.ticks(numTicks));
+          var newTicks = ticks
+            .enter()
+            .append("transform")
+            .attr("class", axisName("Tick", axisIndex));
+          newTicks
+            .append("shape")
+            .call(makeSolid)
+            .append("box")
+            .attr("size", tickSize + " " + tickSize + " " + tickSize);
+          // enter + update
+          ticks
+            .transition()
+            .duration(duration)
+            .attr("translation", function (tick) {
+              return constVecWithAxisValue(0, scale(tick), axisIndex);
+            });
+          ticks.exit().remove();
+        ')
+        tmp <- paste0(tmp,'
+        
+
+        
 
         // base grid lines
         if (axisIndex == 0 || axisIndex == 2) {
           var gridLines = scene
             .selectAll("." + axisName("GridLine", axisIndex))
             .data(scale.ticks(numTicks));
-          gridLines.exit().remove();
+          gridLines.exit().remove();')
 
-        // adds the gridlines for two axes 
-        // should match up with the stems.
-        var newGridLines = gridLines
-            .enter()
-            .append("transform")
-            .attr("class", axisName("GridLine", axisIndex))
-            .attr(
-              "rotation",
-              axisIndex == 0 ? [0, 1, 0, -Math.PI / 2] : [0, 0, 0, 0]
-            )
-            .append("shape");
+        if(any(names(arguments) == "gridLines")){
+          if(eval(arguments$gridLines) == T){
+            tmp <- paste0(tmp, '
+            // adds the gridlines for two axes 
+            // should match up with the stems.
+            var newGridLines = gridLines
+              .enter()
+              .append("transform")
+              .attr("class", axisName("GridLine", axisIndex))
+              .attr(
+                "rotation",
+                axisIndex == 0 ? [0, 1, 0, -Math.PI / 2] : [0, 0, 0, 0]
+              )
+              .append("shape");
 
-          newGridLines
-            .append("appearance")
-            .append("material")
-            .attr("emissiveColor", "red");
-          newGridLines.append("polyline2d");
+            newGridLines
+              .append("appearance")
+              .append("material")
+              .attr("emissiveColor", "#ededed");
+            newGridLines.append("polyline2d");
+            ')
+          }
+        }
+        tmp <- paste0(tmp,'
 
           gridLines
             .selectAll("shape polyline2d")
@@ -563,7 +732,8 @@ d3_3dpoint <- function(data, ...){
           .append("material")')
           if(any(names(arguments) == "stems")){
             if(eval(arguments$stems) == T){
-              tmp <- paste0(tmp, '.attr("emissiveColor", function (rows) { return cirColor(rows.color);})')}
+              tmp <- paste0(tmp, '.attr("emissiveColor", function (rows) { return cirColor(rows.color);})')
+              } else tmp <- paste0(tmp,'.attr("emissiveColor", none)')
           } else tmp <- paste0(tmp,'.attr("emissiveColor", none)')
           tmp <- paste0(tmp, '')
           if(any(names(arguments) == "stemsOpacity")){
