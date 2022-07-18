@@ -2,8 +2,7 @@
 % Please edit documentation in R/d3_3dpoint.R
 \name{d3_3dpoint}
 \alias{d3_3dpoint}
-\title{3d demo https://gist.github.com/hlvoorhees/5986172
-\code {d3_3dpoint} creates a 3d scatter plot.}
+\title{3D scatter plot}
 \usage{
 d3_3dpoint(data, ...)
 }
@@ -54,21 +53,19 @@ d3_3dpoint(data, ...)
 
 \item{stemsOpacity}{(optional) Affects the opacirt of the stems, 0-1 scale}
 
-\item{gridlines}{(optional) Adds gridLines to the zx axis}
+\item{gridLines}{(optional) Adds gridLines to the zx axis}
 
 \item{backgroundColor}{(optional) Affects the background color of the graph, string css colors}
 
 \item{browser}{(mandatory/optional) If code editor has viewer browser is optional if not browser opens visual in a browser window}
 }
 \description{
-3d demo https://gist.github.com/hlvoorhees/5986172
-\code {d3_3dpoint} creates a 3d scatter plot.
+\code{d3_3dpoint} creates a 3-dimensional scatter plot.
 }
 \examples{
-{
-\dontrun[
+\dontrun{
 d3plot(x = Sepal.Length, y = Sepal.Width, z = Petal.Length, color = Species, data = iris) |> d3_3dpoint()
 d3plot(x = cyl, y = gear, z = wt, color = vs, data = mtcars) |> d3_3dpoint()
-]
 }
+
 }
