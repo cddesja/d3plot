@@ -25,6 +25,7 @@
 #' @param stems (optional) Adds stems that connect to each point, boolean
 #' @param stemsOpacity (optional) Affects the opacirt of the stems, 0-1 scale
 #' @param gridlines (optional) Adds gridLines to the zx axis
+#' @param backgroundColor (optional) Affects the background color of the graph, string css colors
 #' @param browser (mandatory/optional) If code editor has viewer browser is optional if not browser opens visual in a browser window
 #'@examples{
 #'\dontrun[
