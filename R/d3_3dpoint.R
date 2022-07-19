@@ -1,5 +1,6 @@
-#' 3d demo https://gist.github.com/hlvoorhees/5986172
-#' \code {d3_3dpoint} creates a 3d scatter plot.
+#' 3D scatter plot
+#'
+#' \code{d3_3dpoint} creates a 3-dimensional scatter plot.
 #' @export
 #' @param data data in JSON format, created by d3plot() or from another source
 #' @param radius (optional) Affects the size of the dots, numerical scale
@@ -24,17 +25,15 @@
 #' @param axisColor (optional) Affects the color of the axis, string css colors
 #' @param stems (optional) Adds stems that connect to each point, boolean
 #' @param stemsOpacity (optional) Affects the opacirt of the stems, 0-1 scale
-#' @param gridlines (optional) Adds gridLines to the zx axis
+#' @param gridLines (optional) Adds gridLines to the zx axis
 #' @param backgroundColor (optional) Affects the background color of the graph, string css colors
 #' @param browser (mandatory/optional) If code editor has viewer browser is optional if not browser opens visual in a browser window
-#'@examples{
-#'\dontrun[
+#'@examples
+#'\dontrun{
 #'d3plot(x = Sepal.Length, y = Sepal.Width, z = Petal.Length, color = Species, data = iris) |> d3_3dpoint()
 #'d3plot(x = cyl, y = gear, z = wt, color = vs, data = mtcars) |> d3_3dpoint()
-#']
 #'}
-#'@export
-#'@export
+#'
 d3_3dpoint <- function(data, ...){
   arguments <- as.list(match.call())[-1]
   tmp <- paste0('
@@ -159,7 +158,7 @@ d3_3dpoint <- function(data, ...){
         }else
           tmp <- paste0(tmp, 'var axisNameKey = ["x", "y", "z"];')
         tmp <- paste0(tmp,'
-      
+
 
       // Helper functions for initializeAxis() and drawAxis()
       function axisName(name, axisIndex) {
@@ -182,7 +181,7 @@ d3_3dpoint <- function(data, ...){
           } else
             tmp <- paste0(tmp, '.attr("diffuseColor", color || "black");')
           tmp <- paste0(tmp,'
-          
+
         return selection;
       }
 
@@ -196,7 +195,7 @@ d3_3dpoint <- function(data, ...){
       function initializeAxis(axisIndex) {
         var key = axisKeys[axisIndex];
         drawAxis(axisIndex, key, initialDuration);
-        
+
         var nameKey = axisNameKey[axisIndex];
 
         var scaleMin = axisRange[0];
@@ -223,7 +222,7 @@ d3_3dpoint <- function(data, ...){
           } else
             tmp <- paste0(tmp, '.attr("emissiveColor", "#788585");')
           tmp <- paste0(tmp,'
-          
+
         newAxisLine
           .append("polyline2d")
           // Line drawn along y axis does not render in Firefox, so draw one
@@ -249,7 +248,7 @@ d3_3dpoint <- function(data, ...){
           .append("shape")
           .call(makeSolid);')
 
-          
+
         if(any(names(arguments) == "labelFontSize")){
           tmp <- paste0(tmp, 'var labelFontSize = ', eval(arguments$labelFontSize), '/10;')
         } else
@@ -283,12 +282,12 @@ d3_3dpoint <- function(data, ...){
           (d3.max(rows, (d) => d.y) - d3.min(rows, (d) => d.y)) * dataMargin;
         var zBuff =
           (d3.max(rows, (d) => d.z) - d3.min(rows, (d) => d.z)) * dataMargin;
-      
+
         var scale = d3.scale
           .linear()
           .domain([1, 10]) // sets the axis tick labels
           .range(axisRange); // range refers to length in px of axis')
-        
+
         if(any(names(arguments) == "xMin")& any(names(arguments) == "xMax")){
           tmp <- paste0(tmp, '
             var xScale = d3.scale
@@ -315,11 +314,11 @@ d3_3dpoint <- function(data, ...){
                 d3.min(rows, (d) => d.x) - xBuff,
                 d3.max(rows, (d) => d.x) + xBuff,
               ]) // demo data range
-              .range(axisRange); // range refers to length in px of axis             
+              .range(axisRange); // range refers to length in px of axis
           ')
         }
         tmp <- paste0(tmp,'')
-        
+
         if(any(names(arguments) == "yMin")& any(names(arguments) == "yMax")){
           tmp <- paste0(tmp, '
             var yScale = d3.scale
@@ -346,11 +345,11 @@ d3_3dpoint <- function(data, ...){
                 d3.min(rows, (d) => d.y) - yBuff,
                 d3.max(rows, (d) => d.y) + yBuff,
               ]) // demo data range
-              .range(axisRange); // range refers to length in px of axis             
+              .range(axisRange); // range refers to length in px of axis
           ')
         }
         tmp <- paste0(tmp,'')
-        
+
         if(any(names(arguments) == "zMin")& any(names(arguments) == "zMax")){
           tmp <- paste0(tmp, '
             var zScale = d3.scale
@@ -377,7 +376,7 @@ d3_3dpoint <- function(data, ...){
                 d3.min(rows, (d) => d.z) - zBuff,
                 d3.max(rows, (d) => d.z) + zBuff,
               ]) // demo data range
-              .range(axisRange); // range refers to length in px of axis             
+              .range(axisRange); // range refers to length in px of axis
           ')
         }
         tmp <- paste0(tmp,'
@@ -385,26 +384,26 @@ d3_3dpoint <- function(data, ...){
         scales[0] = xScale;
         scales[1] = yScale;
         scales[2] = zScale;')
-        
+
         if(any(names(arguments) == "numTicks")){
           tmp <- paste0(tmp, 'var numTicks = ', eval(arguments$numTicks), ';')
         } else
           tmp <- paste0(tmp, 'var numTicks = 5;')
         tmp <- paste0(tmp,'')
-        
+
         if(any(names(arguments) == "tickSize")){
           tmp <- paste0(tmp, 'var tickSize = ', eval(arguments$tickSize)/100, ';')
         } else
           tmp <- paste0(tmp, 'var tickSize = 0.1;')
         tmp <- paste0(tmp,'
-        
+
         ')
         if(any(names(arguments) == "tickFontSize")){
           tmp <- paste0(tmp, 'var tickFontSize = ', eval(arguments$tickFontSize)/10, ';')
         } else
           tmp <- paste0(tmp, 'var tickFontSize = 0.5;')
         tmp <- paste0(tmp,'
-        
+
         ')
          if(any(names(arguments) == "tickNumbers")){
           if(eval(arguments$tickNumbers) == T){
@@ -598,9 +597,9 @@ d3_3dpoint <- function(data, ...){
           ticks.exit().remove();
         ')
         tmp <- paste0(tmp,'
-        
 
-        
+
+
 
         // base grid lines
         if (axisIndex == 0 || axisIndex == 2) {
@@ -612,7 +611,7 @@ d3_3dpoint <- function(data, ...){
         if(any(names(arguments) == "gridLines")){
           if(eval(arguments$gridLines) == T){
             tmp <- paste0(tmp, '
-            // adds the gridlines for two axes 
+            // adds the gridlines for two axes
             // should match up with the stems.
             var newGridLines = gridLines
               .enter()
@@ -671,7 +670,7 @@ d3_3dpoint <- function(data, ...){
         } else
           tmp <- paste0(tmp, 'var sphereRadius = 0.15;')
         tmp <- paste0(tmp,'
-        
+
 
         // Draw a sphere at each x,y,z coordinate.
         var datapoints = scene.selectAll(".datapoint").data(rows);
@@ -697,7 +696,7 @@ d3_3dpoint <- function(data, ...){
           })')
           if(any(names(arguments) == "opacity")){
             tmp <- paste0(tmp, '.attr("transparency",1-', eval(arguments$opacity), ')')
-          } 
+          }
           tmp <- paste0(tmp,'
           .append("title")
           .text(function (rows) {
@@ -739,9 +738,9 @@ d3_3dpoint <- function(data, ...){
           tmp <- paste0(tmp, '')
           if(any(names(arguments) == "stemsOpacity")){
             tmp <- paste0(tmp, '.attr("transparency",1-', eval(arguments$stemsOpacity), ')')
-          } 
+          }
           tmp <- paste0(tmp,';
-  
+
         newStems.append("polyline2d").attr("lineSegments", function (row) {
           return "0 1, 0 0";
         });
