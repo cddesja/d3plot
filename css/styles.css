@@ -1,0 +1,204 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+body {
+  background-color: #f5f5f5;
+}
+
+/* header code follows  */
+/* header code follows  */
+/* header code follows  */
+/* header code follows  */
+header {
+  background-color: white;
+  margin-left: auto;
+  margin-right: auto;
+  align-items: center;
+}
+.ribon {
+  max-width: 1280px;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  /* background-color: teal; */
+  font-family: "Inter", sans-serif;
+  font-size: 1rem;
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 20px;
+}
+.home {
+  font-weight: 800;
+  margin-right: auto;
+}
+nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  min-height: 5vh;
+  font-family: "Inter", sans-serif;
+  font-size: 1rem;
+  margin-left: 20px;
+}
+.rTop {
+  display: flex;
+  justify-content: flex-end;
+}
+.pages li {
+  list-style: none;
+  margin: 0 15px;
+}
+a {
+  text-decoration: none;
+  color: black;
+  font-weight: 600;
+}
+
+.pages {
+  display: flex;
+  justify-content: space-evenly;
+  width: 30%;
+}
+button {
+  background-color: #daf0ee;
+  min-width: 5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 7px;
+  border: none;
+  font-family: "Inter", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-right: 1rem;
+}
+button:hover {
+  opacity: 0.5;
+}
+.burger {
+  display: none;
+}
+.burger div {
+  width: 25px;
+  height: 3px;
+  background-color: black;
+  margin: 5px;
+}
+a:hover {
+  text-decoration: line-through;
+  text-decoration-thickness: 4px;
+  text-decoration-color: #daf0ee;
+}
+
+/* main code below */
+/* main code below */
+/* main code below */
+/* main code below */
+main {
+  max-width: 1280px;
+  margin: 0 auto;
+  min-height: 90vh;
+  align-items: center;
+  padding: 5vh 5vw;
+}
+.d3logo {
+  margin: auto;
+  justify-content: space-around;
+  min-height: 30vh;
+  text-align: center;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+}
+p {
+  margin: 1rem;
+}
+.d3logoimg {
+  width: 35%;
+  margin: auto;
+}
+.logostag {
+  display: flex;
+  justify-content: space-around;
+}
+.graphlogos {
+  min-height: 45vh;
+  display: flex;
+  justify-content: space-around;
+}
+.graphlogo {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  text-align: center;
+  margin: auto;
+}
+.d3logoimgtop:hover {
+  width: 330px;
+}
+.d3logoimgbot:hover {
+  width: 405px;
+}
+
+/* footer code below */
+/* footer code below */
+/* footer code below */
+/* footer code below */
+footer {
+  /* position: absolute;
+  bottom: 0; */
+  background-color: white;
+  min-height: 5vh;
+  width: 100%;
+}
+.ribon {
+  min-height: 5vh;
+}
+.bottom {
+  margin: 0 5px;
+}
+.person {
+  margin-right: auto;
+}
+.bimg:hover {
+  width: 54px;
+}
+h6 {
+  color: grey;
+}
+
+/* about.html follows */
+/* about.html follows */
+/* about.html follows */
+/* about.html follows */
+h2 {
+  font-size: 1rem;
+}
+.graphlogosabout {
+  min-height: 45vh;
+  display: flex;
+  justify-content: space-between;
+  text-align: left;
+}
+.graphlogoabout {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  text-align: left;
+  margin: 5rem 1rem;
+  max-width: 25%;
+  word-wrap: break-word;
+  text-justify: auto;
+}
+.logoMath {
+  /* display: flex;
+  justify-content: center; */
+  margin-top: 1rem;
+  align-items: center;
+}
+.para {
+  margin: 1rem 0;
+}
+.signs {
+  opacity: 0.7;
+}
