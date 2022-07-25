@@ -85,9 +85,10 @@ button:hover {
   margin: 5px;
 }
 a:hover {
-  text-decoration: line-through;
+  /* text-decoration: line-through;
   text-decoration-thickness: 4px;
-  text-decoration-color: #daf0ee;
+  text-decoration-color: #daf0ee; */
+  opacity: 0.4;
 }
 
 /* main code below */
@@ -122,7 +123,7 @@ p {
   justify-content: space-around;
 }
 .graphlogos {
-  min-height: 45vh;
+  min-height: 38vh;
   display: flex;
   justify-content: space-around;
 }
@@ -134,10 +135,12 @@ p {
   margin: auto;
 }
 .d3logoimgtop:hover {
-  width: 330px;
+  /* width: 330px; */
+  opacity: 0.4;
 }
 .d3logoimgbot:hover {
-  width: 405px;
+  /* width: 405px; */
+  opacity: 0.4;
 }
 
 /* footer code below */
@@ -161,7 +164,8 @@ footer {
   margin-right: auto;
 }
 .bimg:hover {
-  width: 54px;
+  /* width: 54px; */
+  opacity: 0.8;
 }
 h6 {
   color: grey;
@@ -175,7 +179,7 @@ h2 {
   font-size: 1rem;
 }
 .graphlogosabout {
-  min-height: 45vh;
+  min-height: 40vh;
   display: flex;
   justify-content: space-between;
   text-align: left;
@@ -187,6 +191,8 @@ h2 {
   text-align: left;
   margin: 5rem 1rem;
   max-width: 25%;
+  /* min-width: 310px; */
+
   word-wrap: break-word;
   text-justify: auto;
 }
@@ -201,4 +207,12 @@ h2 {
 }
 .signs {
   opacity: 0.7;
+}
+
+/* d3_3dpoint() code follows */
+/* d3_3dpoint() code follows */
+/* d3_3dpoint() code follows */
+/* d3_3dpoint() code follows */
+.selector {
+  margin-bottom: 1rem;
 }
