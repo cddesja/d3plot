@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>d3plot-d3_3dpoint()</title>
+    <title>d3plot-d3_point()</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="css/styles.css" />
@@ -45,61 +45,19 @@
       <div class="d3logo">
         <p>about us</p>
         <a href="index.html" class="logostag"
-          ><img src="img/d3_3dpointlogo.png" width="25%" class="d3logoimgtop"
+          ><img src="img/d3_pointlogo.png" width="25%" class="d3logoimgtop"
         /></a>
       </div>
       <div class="graphlogos">
         <div class="graphlogoabout">
-          <h2>Aim of d3_3dpoint()</h2>
+          <h2>Aim of d3_point()</h2>
           <p class="para">
-            d3_3dpoint() creates a three dimentional scatter plot that allows
-            the user to twist it any way they would like. Creating a malluable
-            scatter plot allows a user to quickly disern any variances with the
-            data. d3_3dpoint() builds upon d3_point() adding even more arguments
-            and pulling in more functionality from d3.js.
+            d3_point() creates a two dimentional scatter plot. It was the first
+            user oriented function developed and it was a proof of concept for
+            what could be possible with its successor d3_3dpoint(). It does not
+            bring anthing revolutionary to R however it does give users quite a
+            few tools for customization.
           </p>
-        </div>
-        <div class="graphlogoabout">
-          <h2 class="selector">Arguments 9 of 25</h2>
-          <input type="radio" name="arguments" value="base" checked />
-          Base<br />
-          <input type="radio" name="arguments" value="orient" />
-          numTicks = 10<br />
-          <input type="radio" name="arguments" value="tickSize" /> tickSize =
-          15<br />
-          <input type="radio" name="arguments" value="radius" /> radius = 20<br />
-          <input type="radio" name="arguments" value="gridlines" />
-          opacity = 0.5<br />
-          <input type="radio" name="arguments" value="gridlines" /> orient =
-          "xy"<br />
-          <input type="radio" name="arguments" value="gridlines" />
-          dataMargin = 15<br />
-          <input type="radio" name="arguments" value="stems" /> stems = T<br />
-          <input type="radio" name="arguments" value="stemsOpacity" />
-          stemsOpacity = 0.3<br />
-          <input type="radio" name="arguments" value="gridLines" />
-          gridLines = T<br />
-        </div>
-        <div class="graphlogoabout">
-          <img
-            src="img/d3_3dpointlogo.png"
-            id="graph"
-            width="300"
-            class="radioimg"
-          />
-          <script type="text/javascript">
-            $(document).ready(function () {
-              $("input:radio[name=arguments]").click(function () {
-                var value = $(this).val();
-                var image_name;
-                if (value == "radius") {
-                  image_name = "img/d3_pointlogo.png";
-                }
-
-                $("#graph").attr("src", image_name);
-              });
-            });
-          </script>
         </div>
       </div>
     </main>
@@ -125,3 +83,4 @@
     <script src="" async defer></script>
   </body>
 </html>
+
