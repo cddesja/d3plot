@@ -84,12 +84,15 @@ button:hover {
   background-color: black;
   margin: 5px;
 }
-a:hover {
-  /* text-decoration: line-through;
-  text-decoration-thickness: 4px;
-  text-decoration-color: #daf0ee; */
+.control:hover {
   opacity: 0.4;
 }
+/* a:hover {
+  text-decoration: line-through;
+  text-decoration-thickness: 4px;
+  text-decoration-color: #daf0ee;
+  opacity: 0.4;
+} */
 
 /* main code below */
 /* main code below */
@@ -135,11 +138,9 @@ p {
   margin: auto;
 }
 .d3logoimgtop:hover {
-  /* width: 330px; */
   opacity: 0.4;
 }
 .d3logoimgbot:hover {
-  /* width: 405px; */
   opacity: 0.4;
 }
 
@@ -164,8 +165,7 @@ footer {
   margin-right: auto;
 }
 .bimg:hover {
-  /* width: 54px; */
-  opacity: 0.8;
+  opacity: 0.5;
 }
 h6 {
   color: grey;
@@ -216,3 +216,4 @@ h2 {
 .selector {
   margin-bottom: 1rem;
 }
+
