@@ -59,48 +59,6 @@
             and pulling in more functionality from d3.js.
           </p>
         </div>
-        <div class="graphlogoabout">
-          <h2 class="selector">Arguments 9 of 25</h2>
-          <input type="radio" name="arguments" value="base" checked />
-          Base<br />
-          <input type="radio" name="arguments" value="orient" />
-          numTicks = 10<br />
-          <input type="radio" name="arguments" value="tickSize" /> tickSize =
-          15<br />
-          <input type="radio" name="arguments" value="radius" /> radius = 20<br />
-          <input type="radio" name="arguments" value="gridlines" />
-          opacity = 0.5<br />
-          <input type="radio" name="arguments" value="gridlines" /> orient =
-          "xy"<br />
-          <input type="radio" name="arguments" value="gridlines" />
-          dataMargin = 15<br />
-          <input type="radio" name="arguments" value="stems" /> stems = T<br />
-          <input type="radio" name="arguments" value="stemsOpacity" />
-          stemsOpacity = 0.3<br />
-          <input type="radio" name="arguments" value="gridLines" />
-          gridLines = T<br />
-        </div>
-        <div class="graphlogoabout">
-          <img
-            src="img/d3_3dpointlogo.png"
-            id="graph"
-            width="300"
-            class="radioimg"
-          />
-          <script type="text/javascript">
-            $(document).ready(function () {
-              $("input:radio[name=arguments]").click(function () {
-                var value = $(this).val();
-                var image_name;
-                if (value == "radius") {
-                  image_name = "img/d3_pointlogo.png";
-                }
-
-                $("#graph").attr("src", image_name);
-              });
-            });
-          </script>
-        </div>
       </div>
     </main>
     <footer>
