@@ -81,11 +81,14 @@ button:hover {
 .burger {
   display: none;
 }
-.burger div {
+.bar {
   width: 25px;
   height: 3px;
   background-color: black;
-  margin: 5px;
+  border-radius: 8px;
+  margin: 5px auto;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 .control:hover {
   opacity: 0.4;
@@ -239,8 +242,38 @@ h2 {
   nav {
     min-height: 60px;
   }
-  .pages {
+  /* .pages {
     display: none;
+  } */
+  .burger {
+    display: block;
+  }
+  .burger.active .bar:nth-child(2) {
+    opacity: 0;
+  }
+  .burger.active .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+  .burger.active .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+  .pages {
+    position: fixed;
+    left: -100%;
+    top: 60px;
+    gap: 0;
+    flex-direction: column;
+    background-color: white;
+    width: 100%;
+    text-align: center;
+    transition: 0.3s;
+  }
+  .nav-item {
+    margin: 16px 0;
+    min-height: 2rem;
+  }
+  .pages.active {
+    left: 0;
   }
   /* main code */
   /* main code */
@@ -276,4 +309,3 @@ h2 {
     padding: 10px;
   }
 }
-
