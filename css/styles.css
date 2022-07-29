@@ -217,3 +217,52 @@ h2 {
   margin-bottom: 1rem;
 }
 
+/* for phones */
+/* for phones */
+/* for phones */
+/* for phones */
+@media only screen and (max-width: 550px) {
+  /* header  code */
+  /* header  code */
+  /* header  code */
+  nav {
+    min-height: 60px;
+  }
+  .pages {
+    display: none;
+  }
+  /* main code */
+  /* main code */
+  /* main code */
+  .d3logoimgtop {
+    width: 75%;
+  }
+  .graphlogos {
+    display: block;
+  }
+  .graphlogo {
+    margin-bottom: 3rem;
+  }
+  .d3logoimgbot {
+    width: 70%;
+  }
+  /* about code */
+  .graphlogosabout {
+    display: block;
+  }
+  .graphlogoabout {
+    max-width: 100%;
+  }
+  /* footer code */
+  /* footer code */
+  /* footer code */
+  footer {
+    min-height: 60px;
+  }
+  .botR {
+    margin-top: auto;
+    margin-bottom: auto;
+    padding: 10px;
+  }
+}
+
